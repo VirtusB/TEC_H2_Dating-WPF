@@ -27,8 +27,31 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
+        public static bool IsAllLettersOrDigits(string s)
+        {
+            foreach (char c in s)
+            {
+                if (!Char.IsLetterOrDigit(c))
+                    return false;
+            }
+            return true;
+        }
 
-        public String GenerateSHA256Hash(String input)
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public static String GenerateSHA256Hash(String input)
         {
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input);
             System.Security.Cryptography.SHA256Managed sha256hashstring = new System.Security.Cryptography.SHA256Managed();
@@ -39,6 +62,46 @@ namespace TEC_H2_Dating
 
         private void btnRegisterSubmit_Click(object sender, RoutedEventArgs e)
         {
+            #region Error checks
+            if (txtUsernameRegister.Text == "")
+            {
+                MessageBox.Show("Brugernavn må ikke være tomt.");
+                txtUsernameRegister.Focus();
+                return;
+            }
+            else if (txtUsernameRegister.Text.Length < 4)
+            {
+                MessageBox.Show("Brugernavn skal mindst være 4 karakterer.");
+                txtUsernameRegister.Focus();
+                return;
+            }
+            else if (IsAllLettersOrDigits(txtUsernameRegister.Text) != true)
+            {
+                MessageBox.Show("Brugernavn må ikke indeholde specielle tegn.");
+                txtUsernameRegister.Focus();
+                return;
+            }
+            else if (IsValidEmail(txtEmailRegister.Text) != true)
+            {
+                MessageBox.Show("Ugyldig email adresse");
+                txtEmailRegister.Focus();
+                return;
+            }
+            else if (txtPasswordRegister.Password == "")
+            {
+                MessageBox.Show("Password må ikke være tomt.");
+                txtPasswordRegister.Focus();
+                return;
+            }
+            else if (txtPasswordRegister.Password.Length < 4)
+            {
+                MessageBox.Show("Password skal mindst være 4 karakterer.");
+                txtPasswordRegister.Focus();
+                return;
+            }
+            
+            #endregion
+
             #region Tjek om brugeren eksisterer
             // Tjek om brugeren allerede eksisterer
 
@@ -72,14 +135,31 @@ namespace TEC_H2_Dating
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }          
+            }
 
             #endregion
 
+            #region Indsæt brugeren i databasen, password krypteret med SHA256
 
+            String hashedPassword = GenerateSHA256Hash(txtPasswordRegister.Password);
 
-            //String hashedPassword = GenerateSHA256Hash(txtPasswordRegister.Password);
-            
+            SqlCommand addUserCmd = new SqlCommand("INSERT INTO Users (username, email, userpassword) VALUES (@usUsername, @usEmail, @usPassword)", conn);
+            addUserCmd.Parameters.Add(new SqlParameter("@usUsername", txtUsernameRegister.Text));
+            addUserCmd.Parameters.Add(new SqlParameter("@usEmail", txtEmailRegister.Text));
+            addUserCmd.Parameters.Add(new SqlParameter("@usPassword", hashedPassword));
+
+            addUserCmd.ExecuteNonQuery();
+
+            MessageBox.Show($"Bruger blev oprettet: {txtUsernameRegister.Text}");
+
+            conn.Close();
+
+            // gå til login skærmen
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+            this.Close();
+
+            #endregion
         }
 
         

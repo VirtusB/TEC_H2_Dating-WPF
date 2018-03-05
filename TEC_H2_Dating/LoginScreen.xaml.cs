@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TEC_H2_Dating;
 
 namespace TEC_H2_Dating
 {
@@ -31,14 +32,31 @@ namespace TEC_H2_Dating
         }
         #endregion
 
-        #region Tjek username og password
-        /// <summary>
-        /// Når der klikkes på btnLoginSubmit, prøv at logge ind.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Tjek username og password
         private void btnLoginSubmit_Click(object sender, RoutedEventArgs e)
         {
+
+            #region Error checks
+            if (txtPasswordLogin.Password == "")
+            {
+                MessageBox.Show("Password må ikke være tomt.");
+                txtPasswordLogin.Focus();
+                return;
+            }
+            else if (txtPasswordLogin.Password.Length < 4)
+            {
+                MessageBox.Show("Password skal mindst være 4 karakterer.");
+                txtPasswordLogin.Focus();
+                return;
+            }
+
+            #endregion
+
+            #region Login handler
+
+            String hashedPassword = RegisterScreen.GenerateSHA256Hash(txtPasswordLogin.Password);
+            
+
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
             try
@@ -49,7 +67,7 @@ namespace TEC_H2_Dating
 
                     SqlCommand verifyLogin = new SqlCommand("SELECT COUNT(*) FROM Users WHERE userpassword = @uPass AND username = @uName ", conn);
 
-                    verifyLogin.Parameters.Add(new SqlParameter("@uPass", txtPasswordLogin.Password));
+                    verifyLogin.Parameters.Add(new SqlParameter("@uPass", hashedPassword));
                     verifyLogin.Parameters.Add(new SqlParameter("@uName", txtUsernameLogin.Text));
 
 
@@ -78,11 +96,7 @@ namespace TEC_H2_Dating
             }
             #endregion
         }
-
-        private void userAuth(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
     }
 }
