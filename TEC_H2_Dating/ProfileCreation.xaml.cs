@@ -23,5 +23,94 @@ namespace TEC_H2_Dating
         {
             InitializeComponent();
         }
+
+        // Tjek username og password
+        public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
+        {
+            #region Error checks
+
+            #region firstname
+            if (txtProfileFirstName.Text == "")
+            {
+                MessageBox.Show("Fornavn må ikke være tomt.");
+                txtProfileFirstName.Focus();
+                return;
+            }
+            else if (txtProfileFirstName.Text.Length < 2)
+            {
+                MessageBox.Show("Fornavn skal mindst være 2 karakterer.");
+                txtProfileFirstName.Focus();
+                return;
+            }
+            #endregion
+
+            #region lastname
+            if (txtProfileLastName.Text == "")
+            {
+                MessageBox.Show("Efternavn må ikke være tomt.");
+                txtProfileLastName.Focus();
+                return;
+            }
+            else if (txtProfileLastName.Text.Length < 2)
+            {
+                MessageBox.Show("Efternavn skal mindst være 2 karakterer.");
+                txtProfileLastName.Focus();
+                return;
+            }
+            #endregion
+
+            #region Country
+            if (txtProfileCountry.Text == "")
+            {
+                MessageBox.Show("Land må ikke være tomt.");
+                txtProfileCountry.Focus();
+                return;
+            }
+            else if (txtProfileCountry.Text.Length < 2)
+            {
+                MessageBox.Show("Land skal mindst være 2 karakterer.");
+                txtProfileCountry.Focus();
+                return;
+            }
+            #endregion
+
+            #region City
+            if (txtProfileCity.Text == "")
+            {
+                MessageBox.Show("By må ikke være tomt.");
+                txtProfileCity.Focus();
+                return;
+            }
+            else if (txtProfileCity.Text.Length < 2)
+            {
+                MessageBox.Show("By skal mindst være 2 karakterer.");
+                txtProfileCity.Focus();
+                return;
+            }
+            #endregion
+
+            #region Zip
+
+            if (txtProfileZipCode.Text.Length != 4)
+            {
+                MessageBox.Show("Postnummer skal være 4 karakterer.");
+                txtProfileZipCode.Focus();
+                return;
+            }
+            else if (int.TryParse(txtProfileZipCode, out tempZipCode))
+            {   
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Postnummer må kun indeholde tal");
+                txtProfileZipCode.Focus();
+                return;
+            }
+
+            #endregion
+
+            #endregion
+        }
     }
 }
