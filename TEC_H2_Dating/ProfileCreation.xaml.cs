@@ -24,6 +24,7 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
+<<<<<<< HEAD
         // Tjek username og password
         public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -111,6 +112,11 @@ namespace TEC_H2_Dating
             #endregion
 
             #endregion
+=======
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+>>>>>>> 10d77e02b8cc46bdeb75f2a2f248cf54d034849c
         }
     }
 }

@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:TEC_H2_Dating"
              StartupUri="StartupChoice.xaml">
     <Application.Resources>
-         
+        <Style x:Key="TextAlignLeft" TargetType="CheckBox">
+            <Style.Resources>
+                <Style TargetType="Path">
+                    <Setter Property="FlowDirection" Value="LeftToRight" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FlowDirection" Value="LeftToRight" />
+                </Style>
+            </Style.Resources>
+
+            <Setter Property="FlowDirection" Value="RightToLeft" />
+        </Style>
     </Application.Resources>
 </Application>
