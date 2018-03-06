@@ -102,6 +102,10 @@ namespace TEC_H2_Dating
             }
             #endregion
 
+            string mystring = txtProfileZipCode.Text;
+
+            Convert.ToInt32(mystring);
+
             #region Zip
 
             if (txtProfileZipCode.Text.Length != 4)
