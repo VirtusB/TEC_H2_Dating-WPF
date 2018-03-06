@@ -144,6 +144,12 @@ namespace TEC_H2_Dating
                 txtProfileAge.Focus();
                 return;
             }
+            else if (txtProfileAge.Text == "")
+            {
+                MessageBox.Show("Du skal udfylde din alder");
+                txtProfileAge.Focus();
+                return;
+            }
 
             else if (Convert.ToInt32(txtProfileAge.Text.ToString()) < 18 || Convert.ToInt32(txtProfileAge.Text.ToString()) > 99 )
             {
