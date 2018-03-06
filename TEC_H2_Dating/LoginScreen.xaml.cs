@@ -32,10 +32,11 @@ namespace TEC_H2_Dating
         }
         #endregion
 
-        // Tjek username og password
-        private void btnLoginSubmit_Click(object sender, RoutedEventArgs e)
-        {
+        public static string usernamePublic = "";
 
+        // Tjek username og password
+        public void btnLoginSubmit_Click(object sender, RoutedEventArgs e)
+        {            
             #region Error checks
             if (txtPasswordLogin.Password == "")
             {
@@ -80,9 +81,10 @@ namespace TEC_H2_Dating
                     }
                     else
                     {
+                        usernamePublic = txtUsernameLogin.Text;
                         MainWindow dashboard = new MainWindow();
                         dashboard.Show();
-                        this.Close(); // luk LoginScreen vindue
+                        this.Close(); // luk LoginScreen vindue            
                     }
                 }
             }

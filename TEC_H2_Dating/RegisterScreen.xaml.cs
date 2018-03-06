@@ -99,6 +99,12 @@ namespace TEC_H2_Dating
                 txtPasswordRegister.Focus();
                 return;
             }
+            else if (txtPasswordRegister.Password != txtConfirmPasswordRegister.Password)
+            {
+                MessageBox.Show("De to indtastede adgangskoder er ikke ens. Prøv igen.");
+                txtPasswordRegister.Focus();
+                return;
+            }
             
             #endregion
 

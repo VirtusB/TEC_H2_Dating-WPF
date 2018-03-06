@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:TEC_H2_Dating"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Login" Height="350" Width="350" FontSize="14" Background="#04c582">
+        Title="Log ind" Height="350" Width="350" FontSize="14" Background="#04c582">
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
-            <Label Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center"></Label>
+            <Label Content="Velkomen tilbage" Foreground="White" FontSize="25" HorizontalAlignment="Center"></Label>
             <Separator></Separator>
-            <Label Content="Username" Foreground="White"></Label>
+            <Label Content="Brugernavn" Foreground="White"></Label>
             <TextBox Name="txtUsernameLogin" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
 
-            <Label Content="Password" Foreground="White"></Label>
+            <Label Content="Adgangskode" Foreground="White"></Label>
             <PasswordBox Name="txtPasswordLogin" Background="#545d6a" Foreground="White" FontSize="18"></PasswordBox>
 
-            <Button Click="btnLoginSubmit_Click"  Content="Submit" Margin="60 10" Name="btnLoginSubmit" Background="#545d6a" Foreground="White"></Button>
+            <Button Click="btnLoginSubmit_Click" VerticalAlignment="Center"  Content="Log ind" Margin="50 20 50 0" Padding="0 5 0 5" Name="btnLoginSubmit" Background="#545d6a" Foreground="White"></Button>
         </StackPanel>
     </Border>
 </Window>

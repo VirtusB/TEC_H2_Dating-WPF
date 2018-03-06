@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TEC_H2_Dating"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Login or Register" Height="350" Width="500" FontSize="14" Background="#04c582">
+        Title="Log ind eller opret konto" Height="350" Width="500" FontSize="14" Background="#04c582">
 
 
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
@@ -24,11 +24,11 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <Button Click="startupLoginChoice_Click" Content="Login" Margin="50 25" Padding="10" Name="startupLoginChoice" Background="#545d6a" Foreground="White"></Button>
+                        <Button Click="startupLoginChoice_Click" Content="Log ind" Margin="50 25" Padding="10" Name="startupLoginChoice" Background="#545d6a" Foreground="White"></Button>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
-                        <Button Click="startupRegisterChoice_Click" Content="Register" Margin="50 25" Padding="10" Name="startupRegisterChoice" Background="#545d6a" Foreground="White"></Button>
+                        <Button Click="startupRegisterChoice_Click" Content="Opret konto" Margin="50 25" Padding="10" Name="startupRegisterChoice" Background="#545d6a" Foreground="White"></Button>
                     </StackPanel>
                 </Grid>
 
