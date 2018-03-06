@@ -108,6 +108,10 @@
                 <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Padding="0 0 0 100"  Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
             </StackPanel>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 183c2b6c27bbee5b7ddbcd5da35446c30b6fdaf3
             <Button Click="btnProfileCreate_Click" x:Name="btnProfileCreate" Content="Opret profil" Margin="80 25" Padding="10" Background="#545d6a" Foreground="White"></Button>
 
         </StackPanel>

@@ -156,6 +156,22 @@ namespace TEC_H2_Dating
 
             #endregion
 
+            #region Køn
+
+            if (checkboxProfileMale.IsChecked == true && checkboxProfileFemale.IsChecked == true)
+            {
+                MessageBox.Show("Du kan ikke vælge begge køn.");              
+                return;
+            }
+            else if (checkboxProfileMale.IsChecked == false && checkboxProfileFemale.IsChecked == false)
+            {
+                MessageBox.Show("Du skal vælge dit køn.");
+                return;
+            }
+
+
+            #endregion
+
             #region Bio
 
             if (txtProfileBio.Text.Length > 279)
