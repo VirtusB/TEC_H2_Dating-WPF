@@ -34,10 +34,12 @@ namespace TEC_H2_Dating
         #endregion
 
         public static string usernamePublic = "";
+        public static int userID = 0;
 
         // Tjek username og password
         public void btnLoginSubmit_Click(object sender, RoutedEventArgs e)
         {            
+           
             #region Error checks
             if (txtPasswordLogin.Password == "")
             {
@@ -77,8 +79,6 @@ namespace TEC_H2_Dating
                    
 
                     object infoCorrect = verifyLogin.ExecuteScalar();
-
-                    
                     
 
                     if (infoCorrect == null) // vis en besked hvis de indtaste informationer er forkerte
@@ -87,7 +87,7 @@ namespace TEC_H2_Dating
                     }
                     else
                     {
-                        int userID = (int)infoCorrect;
+                        userID = (int)infoCorrect;
 
                         SqlCommand profileExistence = new SqlCommand("SELECT profileID FROM Profiles WHERE Profiles.userID = @uID", conn);
                         profileExistence.Parameters.Add(new SqlParameter("@uID", userID));
