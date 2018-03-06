@@ -13,7 +13,7 @@
 
 
         <StackPanel Margin="20">
-            <Label x:Name="lblProfileUsername" Margin="0 0 0 15" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" Content="Username" Foreground="White"></Label>
+            <Label x:Name="lblProfileUsername" Margin="0 0 0 15" FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" Content="$Username" Foreground="White"></Label>
 
 
             <!--Fornavn og efternavn--> 

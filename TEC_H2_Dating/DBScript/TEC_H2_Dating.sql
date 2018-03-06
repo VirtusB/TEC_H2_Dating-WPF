@@ -62,8 +62,8 @@ GO
 GO
 
 CREATE TABLE Payment_Methods (
-    PM_typ nvarchar(50) NOT NULL,
-    PM_typeID int IDENTITY(1,1) PRIMARY KEY
+    PM_typeID int IDENTITY(1,1) PRIMARY KEY,
+    PM_typ nvarchar(50) NOT NULL   
 )
 
 GO
