@@ -23,5 +23,10 @@ namespace TEC_H2_Dating
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+        }
     }
 }
