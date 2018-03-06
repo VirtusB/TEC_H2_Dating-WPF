@@ -17,7 +17,7 @@
             <Label Content="Adgangskode" Foreground="White"></Label>
             <PasswordBox Name="txtPasswordLogin" Background="#545d6a" Foreground="White" FontSize="18"></PasswordBox>
 
-            <Button Click="btnLoginSubmit_Click" VerticalAlignment="Center"  Content="Log ind" Margin="50 20 50 0" Padding="0 5 0 5" Name="btnLoginSubmit" Background="#545d6a" Foreground="White"></Button>
+            <Button IsDefault="True" Click="btnLoginSubmit_Click" VerticalAlignment="Center"  Content="Log ind" Margin="50 20 50 0" Padding="0 5 0 5" Name="btnLoginSubmit" Background="#545d6a" Foreground="White"></Button>
         </StackPanel>
     </Border>
 </Window>
