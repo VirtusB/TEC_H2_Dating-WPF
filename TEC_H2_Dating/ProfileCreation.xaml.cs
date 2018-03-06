@@ -24,7 +24,13 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
-<<<<<<< HEAD
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+
+        }
+
+
         // Tjek username og password
         public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -40,6 +46,12 @@ namespace TEC_H2_Dating
             else if (txtProfileFirstName.Text.Length < 2)
             {
                 MessageBox.Show("Fornavn skal mindst være 2 karakterer.");
+                txtProfileFirstName.Focus();
+                return;
+            }
+            else if (txtProfileFirstName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Fornavn må ikke indeholde tal.");
                 txtProfileFirstName.Focus();
                 return;
             }
@@ -98,8 +110,8 @@ namespace TEC_H2_Dating
                 txtProfileZipCode.Focus();
                 return;
             }
-            else if (int.TryParse(txtProfileZipCode, out tempZipCode))
-            {   
+            else if (int.TryParse(txtProfileZipCode.Text, out int tempZipCode))
+            {
                 return;
             }
             else
@@ -112,11 +124,7 @@ namespace TEC_H2_Dating
             #endregion
 
             #endregion
-=======
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
->>>>>>> 10d77e02b8cc46bdeb75f2a2f248cf54d034849c
+
         }
     }
 }
