@@ -24,7 +24,11 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
-<<<<<<< HEAD
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+        }
+
         // Tjek username og password
         public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +47,12 @@ namespace TEC_H2_Dating
                 txtProfileFirstName.Focus();
                 return;
             }
+            else if (txtProfileFirstName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Fornavn må ikke indeholde tal.");
+                txtProfileFirstName.Focus();
+                return;
+            }
             #endregion
 
             #region lastname
@@ -55,6 +65,12 @@ namespace TEC_H2_Dating
             else if (txtProfileLastName.Text.Length < 2)
             {
                 MessageBox.Show("Efternavn skal mindst være 2 karakterer.");
+                txtProfileLastName.Focus();
+                return;
+            }
+            else if (txtProfileLastName.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Efternavn må ikke indeholde tal.");
                 txtProfileLastName.Focus();
                 return;
             }
@@ -73,6 +89,12 @@ namespace TEC_H2_Dating
                 txtProfileCountry.Focus();
                 return;
             }
+            else if (txtProfileCountry.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Land må ikke indeholde tal.");
+                txtProfileCountry.Focus();
+                return;
+            }
             #endregion
 
             #region City
@@ -88,6 +110,12 @@ namespace TEC_H2_Dating
                 txtProfileCity.Focus();
                 return;
             }
+            else if (txtProfileCity.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("By må ikke indeholde tal.");
+                txtProfileCity.Focus();
+                return;
+            }
             #endregion
 
             #region Zip
@@ -98,11 +126,7 @@ namespace TEC_H2_Dating
                 txtProfileZipCode.Focus();
                 return;
             }
-            else if (int.TryParse(txtProfileZipCode, out tempZipCode))
-            {   
-                return;
-            }
-            else
+            else if (txtProfileZipCode.Text.Any(char.IsLetter))
             {
                 MessageBox.Show("Postnummer må kun indeholde tal");
                 txtProfileZipCode.Focus();
@@ -111,12 +135,39 @@ namespace TEC_H2_Dating
 
             #endregion
 
+            #region Age
+
+            if (txtProfileAge.Text.Any(char.IsLetter))
+            {
+                MessageBox.Show("Alder må kun indeholde tal");
+                txtProfileAge.Focus();
+                return;
+            }
+
+            else if (Convert.ToInt32(txtProfileAge.Text.ToString()) < 18 || Convert.ToInt32(txtProfileAge.Text.ToString()) > 99 )
+            {
+               
+                MessageBox.Show("Du skal være over 18 og under 99 for at oprette en profil");
+                txtProfileAge.Focus();
+                return;
+            }
+
+
             #endregion
-=======
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
->>>>>>> 10d77e02b8cc46bdeb75f2a2f248cf54d034849c
+
+            #region Bio
+
+            if (txtProfileBio.Text.Length > 279)
+            {
+                MessageBox.Show("Beskrivelse må ikke være på mere end 280 karakterer.");
+                txtProfileBio.Focus();
+                return;
+            }
+
+            #endregion
+
+            #endregion
+
         }
     }
 }
