@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,25 +67,51 @@ namespace TEC_H2_Dating
                 {
                     conn.Open();
 
-                    SqlCommand verifyLogin = new SqlCommand("SELECT COUNT(*) FROM Users WHERE userpassword = @uPass AND username = @uName ", conn);
+                    SqlCommand verifyLogin = new SqlCommand("SELECT userID FROM Users WHERE userpassword = @uPass AND username = @uName ", conn);
 
                     verifyLogin.Parameters.Add(new SqlParameter("@uPass", hashedPassword));
                     verifyLogin.Parameters.Add(new SqlParameter("@uName", txtUsernameLogin.Text));
 
 
 
-                    int infoCorrect = (int)verifyLogin.ExecuteScalar();
+                   
 
-                    if (infoCorrect != 1) // vis en besked hvis de indtaste informationer er forkerte
+                    object infoCorrect = verifyLogin.ExecuteScalar();
+
+                    
+                    
+
+                    if (infoCorrect == null) // vis en besked hvis de indtaste informationer er forkerte
                     {                      
                         MessageBox.Show("Username or password is incorrect");
                     }
                     else
                     {
-                        usernamePublic = txtUsernameLogin.Text;
-                        MainWindow dashboard = new MainWindow();
-                        dashboard.Show();
-                        this.Close(); // luk LoginScreen vindue            
+                        int userID = (int)infoCorrect;
+
+                        SqlCommand profileExistence = new SqlCommand("SELECT profileID FROM Profiles WHERE Profiles.userID = @uID", conn);
+                        profileExistence.Parameters.Add(new SqlParameter("@uID", userID));
+
+                        object profileIDExist = profileExistence.ExecuteScalar();
+
+                        if (profileIDExist == null)
+                        {
+                            usernamePublic = txtUsernameLogin.Text;
+
+                            NoProfile opretProfil = new NoProfile();
+                            opretProfil.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            usernamePublic = txtUsernameLogin.Text;
+                            MainWindow dashboard = new MainWindow();
+                            dashboard.Show();
+                            this.Close(); // luk LoginScreen vindue  
+                        }
+                        
+
+                                  
                     }
                 }
             }
