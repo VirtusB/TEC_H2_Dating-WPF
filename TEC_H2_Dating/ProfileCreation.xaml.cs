@@ -27,8 +27,15 @@ namespace TEC_H2_Dating
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+<<<<<<< HEAD
         }
 
+=======
+
+        }
+
+
+>>>>>>> dfcd37c4282972595ec75168da70310ddf2ea4f5
         // Tjek username og password
         public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
         {
@@ -126,7 +133,15 @@ namespace TEC_H2_Dating
                 txtProfileZipCode.Focus();
                 return;
             }
+<<<<<<< HEAD
             else if (txtProfileZipCode.Text.Any(char.IsLetter))
+=======
+            else if (int.TryParse(txtProfileZipCode.Text, out int tempZipCode))
+            {
+                return;
+            }
+            else
+>>>>>>> dfcd37c4282972595ec75168da70310ddf2ea4f5
             {
                 MessageBox.Show("Postnummer må kun indeholde tal");
                 txtProfileZipCode.Focus();
@@ -155,6 +170,7 @@ namespace TEC_H2_Dating
 
             #endregion
 
+<<<<<<< HEAD
             #region Bio
 
             if (txtProfileBio.Text.Length > 279)
@@ -168,6 +184,8 @@ namespace TEC_H2_Dating
 
             #endregion
 
+=======
+>>>>>>> dfcd37c4282972595ec75168da70310ddf2ea4f5
         }
     }
 }

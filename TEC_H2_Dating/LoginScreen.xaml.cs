@@ -83,7 +83,7 @@ namespace TEC_H2_Dating
 
                     if (infoCorrect == null) // vis en besked hvis de indtaste informationer er forkerte
                     {                      
-                        MessageBox.Show("Username or password is incorrect");
+                        MessageBox.Show("Brugernavn eller adgangskode forkert");
                     }
                     else
                     {
