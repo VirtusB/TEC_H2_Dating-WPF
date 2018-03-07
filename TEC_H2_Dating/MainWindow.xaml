@@ -4,16 +4,55 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TEC_H2_Dating"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
-        Title="Dashboard" Height="800" Width="1200">
+        Title="Dashboard" MinHeight="800" Height="800" Width="1200" MinWidth="1200">
+
+
+        
     
-    
-    <Grid Background="#333">
-        <Label HorizontalAlignment="Center" Foreground="White" Content="Dashboard"></Label>
-        <Label HorizontalAlignment="Center" Margin="0 20 0 0" x:Name="lblPublicUsername" Foreground="White" Content="Username"></Label>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="#EEE" BorderThickness="0 0 1 0">
+            <StackPanel MinWidth="90" Background="#2E3137" Grid.Column="0">
+
+                <!--Logo-->
+                <StackPanel>
+                    <Border BorderBrush="#AAABAD" BorderThickness="0 0 0 1">
+                        <Grid Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="center" MinWidth="90" MinHeight="90" Source="Images/heart.png"></Image>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+               
+
+            </StackPanel>
+        </Border>
+
+
+            
+        
+        
+
+        <StackPanel Grid.Column="1" Background="#2e3137">
+            <StackPanel>
+                <Image MinHeight="90" MaxHeight="90" Stretch="UniformToFill"  Source="Images/banner.jpg"></Image>
+            </StackPanel>
+        </StackPanel>
+        
+        
     </Grid>
+       
     
-    
+
 </Window>

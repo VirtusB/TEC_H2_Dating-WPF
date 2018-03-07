@@ -29,7 +29,9 @@ namespace TEC_H2_Dating
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show($"Velkommen, {LoginScreen.usernamePublic}");
-            lblPublicUsername.Content = LoginScreen.usernamePublic;
+
+            // lblPublicUsername.Content = LoginScreen.usernamePublic; // HUSK
+
             this.Title = $"Velkommen, {LoginScreen.usernamePublic}";
 
         }

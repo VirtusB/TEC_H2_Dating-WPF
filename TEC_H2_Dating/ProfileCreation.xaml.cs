@@ -195,6 +195,8 @@ namespace TEC_H2_Dating
 
             #endregion
 
+            #region Indsæt profilen i databasen
+
             int userID = LoginScreen.userID; // hent userID fra LoginScreen
 
             // hent alle værdier fra profilen til lokale variabler
@@ -260,6 +262,8 @@ namespace TEC_H2_Dating
 
 
             conn.Close();
+
+            #endregion
         }
 
         private void btnChooseProfileImage_Click(object sender, RoutedEventArgs e)
