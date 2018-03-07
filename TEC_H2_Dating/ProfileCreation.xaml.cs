@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,6 +191,21 @@ namespace TEC_H2_Dating
             #endregion
 
             #endregion
+
+            int userID = LoginScreen.userID; // hent userID fra LoginScreen
+
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
+
+            conn.Open();
+
+            SqlCommand insertProfile = new SqlCommand("SELECT FROM WHERE = ", conn);
+
+            //insertProfile.Parameters.Add(new SqlParameter("@uPass", hashedPassword));
+            //insertProfile.Parameters.Add(new SqlParameter("@uName", txtUsernameLogin.Text));
+
+            
+
+            conn.Close();
         }
     }
 }
