@@ -105,6 +105,8 @@ GO
 
 INSERT INTO Users (Username, userpassword, email)
 VALUES ('Bruger', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'brugermail@mail.com')
+	   ('Mand1', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'mand1@mail.com')
+	   ('Kvinde1', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'kvinde1@mail.com')
 
 INSERT INTO Interests (InterestName)
 VALUES 	('Musik'),
@@ -124,7 +126,3 @@ VALUES 	('Musik'),
 		('Fitness')
 
 GO
-
---Quiries
---DELETE FROM Images
---WHERE (Images.UserID = 1) AND (Images.Created < (SELECT TOP 1 created FROM Images WHERE images.userid = 1 ORDER BY created desc)) 
