@@ -253,6 +253,10 @@ namespace TEC_H2_Dating
                 MessageBox.Show("Fejl under oprettelse");
             }
 
+            SqlCommand deleteAllPriorImg = new SqlCommand("DELETE FROM Images WHERE(Images.userID = @uID) AND(Images.created < (SELECT TOP 1 created FROM Images WHERE images.userID = @uID ORDER BY created DESC))", conn); // kommando som sletter alle images uploaded, andet end det nyeste billede
+            deleteAllPriorImg.Parameters.AddWithValue("@uID", userID);
+
+            deleteAllPriorImg.ExecuteNonQuery();
 
 
             conn.Close();
@@ -267,11 +271,22 @@ namespace TEC_H2_Dating
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 
-            fileDialog.ShowDialog();
+            //fileDialog.ShowDialog(); // bliver kaldt i error tjeket lige nede under
 
             // fil stream
 
+            
+
+            if (fileDialog.ShowDialog() == false)
+            {
+                MessageBox.Show("Billedet må ikke være tomt");
+                return;
+            }
+
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
+
+            
+            
 
             byte[] data = new byte[fs.Length];
             fs.Read(data, 0, System.Convert.ToInt32(fs.Length));
@@ -320,7 +335,11 @@ namespace TEC_H2_Dating
             bi.StreamSource = ms;
             bi.EndInit();
             profileImageBox.Source = bi;
-          
+
+
+            
+
+
             conn.Close();
             
        
