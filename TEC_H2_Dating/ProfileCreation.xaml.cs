@@ -267,11 +267,22 @@ namespace TEC_H2_Dating
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
             fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 
-            fileDialog.ShowDialog();
+            //fileDialog.ShowDialog(); // bliver kaldt i error tjeket lige nede under
 
             // fil stream
 
+            
+
+            if (fileDialog.ShowDialog() == false)
+            {
+                MessageBox.Show("Billedet må ikke være tomt");
+                return;
+            }
+
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
+
+            
+            
 
             byte[] data = new byte[fs.Length];
             fs.Read(data, 0, System.Convert.ToInt32(fs.Length));
@@ -320,7 +331,12 @@ namespace TEC_H2_Dating
             bi.StreamSource = ms;
             bi.EndInit();
             profileImageBox.Source = bi;
-          
+
+
+            SqlCommand deleteAllPriorImg = new SqlCommand("INSERT INTO Images(userID, imageFile) VALUES (@uID, @imageData)", conn); // kommando som sletter alle images uploaded, andet end det nyeste billede
+
+
+
             conn.Close();
             
        
