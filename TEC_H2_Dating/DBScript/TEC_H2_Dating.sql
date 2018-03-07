@@ -100,3 +100,31 @@ CREATE TABLE Matches (
     profileID int NOT NULL FOREIGN KEY REFERENCES Profiles(profileID),
     created datetime DEFAULT GETDATE()
 )
+
+GO
+
+INSERT INTO Users (Username, userpassword, email)
+VALUES ('Bruger', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'brugermail@mail.com')
+
+INSERT INTO Interests (InterestName)
+VALUES 	('Musik'),
+		('Mad'),
+		('Rejser'),
+		('Mad Moneyz'),
+		('Biler'),
+		('Netflix'),
+		('Lange gåture på stranden'),
+		('Bjergbestigning'),
+		('Ekstrem-sport'),
+		('Surfing'),
+		('En times offentlig trasnport i en kold bus mandag morgen'),
+		('Mode'),
+		('Gaming'),
+		('Brætspil'),
+		('Fitness')
+
+GO
+
+--Quiries
+--DELETE FROM Images
+--WHERE (Images.UserID = 1) AND (Images.Created < (SELECT TOP 1 created FROM Images WHERE images.userid = 1 ORDER BY created desc)) 
