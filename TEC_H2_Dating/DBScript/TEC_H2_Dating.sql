@@ -79,7 +79,7 @@ GO
 
 CREATE TABLE Images (
     imageID int IDENTITY(1,1) PRIMARY KEY,
-    profileID int NOT NULL FOREIGN KEY REFERENCES Profiles(profileID),
+    userID int NOT NULL FOREIGN KEY REFERENCES Users(userID),
     imageFile varbinary(max),
     created datetime DEFAULT GETDATE()
 )

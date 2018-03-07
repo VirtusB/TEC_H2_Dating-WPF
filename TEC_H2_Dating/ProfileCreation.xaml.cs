@@ -194,16 +194,63 @@ namespace TEC_H2_Dating
 
             int userID = LoginScreen.userID; // hent userID fra LoginScreen
 
+            // hent alle værdier fra profilen til lokale variabler
+            string profileFornavn = this.txtProfileFirstName.Text;
+            string profileEfternavn = this.txtProfileLastName.Text;
+            string profileLand = this.txtProfileCountry.Text;
+            string profileBy = this.txtProfileCity.Text;
+            int profilePostnummer = Convert.ToInt32(this.txtProfileZipCode.Text);
+            int profileAlder = Convert.ToInt32(this.txtProfileAge.Text);
+            bool profileSex; // hvis true, mand, hvis false, kvinde.
+            string profileBio = this.txtProfileBio.Text;
+
+            if (this.checkboxProfileMale.IsChecked == true)
+            {
+                profileSex = true;
+            }
+            else if (this.checkboxProfileFemale.IsChecked == true)
+            {
+                profileSex = false;
+            }
+            else
+            {
+                MessageBox.Show("Fejl relaretet til valg af køn");
+                return;
+            }
+
+
+
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
             conn.Open();
 
-            SqlCommand insertProfile = new SqlCommand("SELECT FROM WHERE = ", conn);
+            SqlCommand insertProfile = new SqlCommand("INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, zipcode) VALUES (@uID, @fName, @lName, @pBio, @pSex, @pAge, @pCountry, @pCity, @pZip)", conn);
 
-            //insertProfile.Parameters.Add(new SqlParameter("@uPass", hashedPassword));
-            //insertProfile.Parameters.Add(new SqlParameter("@uName", txtUsernameLogin.Text));
+            // tilføj alle lokale variabler til sql kommandoen
+            insertProfile.Parameters.Add(new SqlParameter("@uID", userID));
+            insertProfile.Parameters.Add(new SqlParameter("@fName", profileFornavn));
+            insertProfile.Parameters.Add(new SqlParameter("@lName", profileEfternavn));
+            insertProfile.Parameters.Add(new SqlParameter("@pBio", profileBio));
+            insertProfile.Parameters.Add(new SqlParameter("@pSex", profileSex));
+            insertProfile.Parameters.Add(new SqlParameter("@pAge", profileAlder));
+            insertProfile.Parameters.Add(new SqlParameter("@pCountry", profileLand));
+            insertProfile.Parameters.Add(new SqlParameter("@pCity", profileBy));
+            insertProfile.Parameters.Add(new SqlParameter("@pZip", profilePostnummer));
 
-            
+
+            if (insertProfile.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show($"Din profil blev oprettet, {profileFornavn} {profileEfternavn}");
+                MainWindow dashboard = new MainWindow();
+                dashboard.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Fejl under oprettelse");
+            }
+
+
 
             conn.Close();
         }
