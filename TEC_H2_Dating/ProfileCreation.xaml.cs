@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
 
 namespace TEC_H2_Dating
 {
@@ -253,6 +256,77 @@ namespace TEC_H2_Dating
 
 
             conn.Close();
+        }
+
+        private void btnChooseProfileImage_Click(object sender, RoutedEventArgs e)
+        {
+            int userID = LoginScreen.userID; // hent userID fra LoginScreen
+
+            // file vindue
+
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            fileDialog.ShowDialog();
+
+            // fil stream
+
+            FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
+
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, System.Convert.ToInt32(fs.Length));
+
+            fs.Close(); // luk file stream
+
+
+            // indsæt billede i databasen
+
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
+
+            conn.Open();
+
+            SqlCommand savePictureCmd = new SqlCommand("INSERT INTO Images(userID, imageFile) VALUES (@uID, @imageData)", conn);
+
+            savePictureCmd.Parameters.AddWithValue("@uID", userID);
+            savePictureCmd.Parameters.AddWithValue("@imageData", data);
+            savePictureCmd.ExecuteNonQuery();
+
+            conn.Close(); // luk conn
+
+            // vis billedet, ikke fra databasen i dette eksempel
+            //ImageSourceConverter imgs = new ImageSourceConverter();
+            //profileImageBox.SetValue(Image.SourceProperty, imgs.ConvertFromString(fileDialog.FileName.ToString()))   
+            
+
+            conn.Open();
+            DataSet ds = new DataSet();
+            SqlDataAdapter sqa = new SqlDataAdapter("SELECT TOP 1 imageFile FROM Images WHERE userID = @uID ORDER BY CREATED DESC", conn);
+            sqa.SelectCommand.Parameters.AddWithValue("@uID", userID);
+
+
+            sqa.Fill(ds);        
+
+
+            byte[] DBdata = (byte[])ds.Tables[0].Rows[0][0];
+            MemoryStream strm = new MemoryStream();
+            strm.Write(data, 0, data.Length);
+            strm.Position = 0;                               
+            System.Drawing.Image img = System.Drawing.Image.FromStream(strm);
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            ms.Seek(0, SeekOrigin.Begin);
+            bi.StreamSource = ms;
+            bi.EndInit();
+            profileImageBox.Source = bi;
+          
+            conn.Close();
+            
+       
+
+            
+
         }
     }
 }

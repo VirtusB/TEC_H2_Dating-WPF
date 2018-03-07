@@ -95,14 +95,29 @@
 
             </Grid>
 
-            
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0 20 0 0" Grid.Column="1">
+                    <Border BorderThickness="1" BorderBrush="#FFF">
+                        <Image x:Name="profileImageBox" MaxHeight="150" MaxWidth="150" MinHeight="150" MinWidth="15"></Image>
+                    </Border>
+                    <Button Click="btnChooseProfileImage_Click" x:Name="btnChooseProfileImage" Content="Vælg billede" Background="#545d6a" Margin="60 15 60 0" Foreground="White"></Button>
+                </StackPanel>
+                
+            </Grid>
             
             
             
            
             <!--Beskrivelse-->
 
-            <Grid Margin="30 35 30 0">
+            <Grid Margin="30 30 30 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -112,8 +127,10 @@
                 <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Padding="0 0 0 100"  Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
             </StackPanel>
-            <Button Click="btnProfileCreate_Click" x:Name="btnProfileCreate" Content="Opret profil" Margin="80 25" Padding="10" Background="#545d6a" Foreground="White"></Button>
+            <Button Click="btnProfileCreate_Click" x:Name="btnProfileCreate" Content="Opret profil" Margin="140 15" Padding="10" Background="#545d6a" Foreground="White"></Button>
 
+            
+            
         </StackPanel>
 
 
