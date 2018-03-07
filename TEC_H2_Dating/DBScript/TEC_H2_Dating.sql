@@ -124,7 +124,3 @@ VALUES 	('Musik'),
 		('Fitness')
 
 GO
-
---Quiries
---DELETE FROM Images
---WHERE (Images.UserID = 1) AND (Images.Created < (SELECT TOP 1 created FROM Images WHERE images.userid = 1 ORDER BY created desc)) 
