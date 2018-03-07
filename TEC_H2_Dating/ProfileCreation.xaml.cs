@@ -258,7 +258,7 @@ namespace TEC_H2_Dating
             SqlCommand deleteAllPriorImg = new SqlCommand("DELETE FROM Images WHERE(Images.userID = @uID) AND(Images.created < (SELECT TOP 1 created FROM Images WHERE images.userID = @uID ORDER BY created DESC))", conn); // kommando som sletter alle images uploaded, andet end det nyeste billede
             deleteAllPriorImg.Parameters.AddWithValue("@uID", userID);
 
-            deleteAllPriorImg.ExecuteNonQuery();
+            deleteAllPriorImg.ExecuteNonQuery(); // TODO - appen crasher hvis man ikke har valgt et profil billede!
 
 
             conn.Close();
