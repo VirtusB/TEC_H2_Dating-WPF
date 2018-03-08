@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
+using System.Threading;
+using System.Windows.Markup;
+using WPFCustomMessageBox;
 
 namespace TEC_H2_Dating
 {
@@ -49,6 +53,23 @@ namespace TEC_H2_Dating
         private void btnDashboardSettings_Click(object sender, RoutedEventArgs e)
         {
             HomePageFrame.Content = new ProfileSettingsPage();
+        }
+
+        private void btnDashboardLogout_Click(object sender, RoutedEventArgs e)
+        {
+            // standard windows messagebox som bruger system sproget, hvis system sproget er engelsk står der "yes", "no"
+            //MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Er du sikker?", "Log ud", System.Windows.MessageBoxButton.YesNo);
+
+
+            // custom messagebox, her kan vi selv vælge hvad der skal stå i stedet for yes/no
+            MessageBoxResult logoutResult = CustomMessageBox.ShowYesNo("Er du sikker?", "Log ud", "Ja", "Nej");
+
+            if (logoutResult == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+
+            
         }
     }
 }
