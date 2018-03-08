@@ -104,9 +104,7 @@
             <StackPanel>
                 <Grid>
                     <Image MinHeight="90" MaxHeight="90" Stretch="UniformToFill" StretchDirection="DownOnly" Source="Images/resizedbanner-notext.png"></Image>
-                    <TextBlock FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#abbfff" Text="Bliv Super Medlem i dag - kun kr. 79 pr. md!">
-                        <Label Content="Bliv Super Medlem i dag - kun kr. 79 pr. md!" FontSize="36" Foreground="#abbfff" Style="{StaticResource OperatorProLight}" ></Label>
-                    </TextBlock>
+                    <TextBlock Text="Bliv Super Medlem i dag - kun kr. 79 pr. md!" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#abbfff"></TextBlock>
                 </Grid>
             </StackPanel>
 

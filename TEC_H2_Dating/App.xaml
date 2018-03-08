@@ -17,9 +17,7 @@
             <Setter Property="FlowDirection" Value="RightToLeft" />
         </Style>
 
-        <Style x:Key="OperatorProLight">
-            <Setter Property="TextElement.FontFamily" Value="/Fonts/OperatorPro-Light.otf"></Setter>
-        </Style>
+       
         
     </Application.Resources>
 </Application>
