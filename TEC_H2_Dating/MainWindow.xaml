@@ -16,16 +16,16 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition MaxWidth="108" Width="0.1*" ></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="#EEE" BorderThickness="0 0 1 0">
+        <Border BorderBrush="#606265" BorderThickness="0 0 1 0">
             <StackPanel MinWidth="90" Background="#2E3137" Grid.Column="0">
 
                 <!--Logo-->
                 <StackPanel>
-                    <Border BorderBrush="#AAABAD" BorderThickness="0 0 0 1">
+                    <Border BorderBrush="#606265" BorderThickness="0 0 0 1">
                         <Grid Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
@@ -77,13 +77,13 @@
 
         <!--Log ud-->
         <StackPanel VerticalAlignment="Bottom" Grid.Column="0">
-            <Border BorderBrush="#AAABAD" BorderThickness="0 1 0 0">
+            <Border BorderBrush="#606265" BorderThickness="0 1 0 0">
                 <Grid Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Click="btnDashboardLogout_Click" x:Name="btnDashboardLogout" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                        <fa:ImageAwesome Margin="0 0 0 10" Width="60" Foreground="#ff5757" Icon="TimesCircle" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                        <fa:ImageAwesome Margin="0 0 0 10" Width="60" Foreground="#FF005C" Icon="TimesCircle" VerticalAlignment="Top" HorizontalAlignment="Center" />
                     </Button>
                     <TextBlock Margin="0 0 0 5" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Log ud"></TextBlock>
                 </Grid>
