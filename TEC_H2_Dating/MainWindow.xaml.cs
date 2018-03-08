@@ -17,6 +17,8 @@ using System.Globalization;
 using System.Threading;
 using System.Windows.Markup;
 using WPFCustomMessageBox;
+using System.Data.SqlClient;
+using TEC_H2_Dating;
 
 namespace TEC_H2_Dating
 {
@@ -37,6 +39,10 @@ namespace TEC_H2_Dating
             // lblPublicUsername.Content = LoginScreen.usernamePublic; // HUSK
 
             this.Title = $"Velkommen, {LoginScreen.usernamePublic}";
+
+
+            HomePageFrame.Content = new HomePage(); // sæt standard siden til at være HomePage
+
 
         }
 

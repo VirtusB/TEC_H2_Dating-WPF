@@ -41,6 +41,8 @@
         </Border>
 
         <!--Knapper-->
+        
+        <!--Hjem--> 
         <StackPanel VerticalAlignment="Center" Grid.Column="0">
             <Grid Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
                 <Grid.ColumnDefinitions>
@@ -52,7 +54,7 @@
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Hjem"></TextBlock>
             </Grid>
 
-
+            <!--Min Profil--> 
             <Grid Margin="0 20 0 0" Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
@@ -62,7 +64,8 @@
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Min Profil"></TextBlock>
             </Grid>
-
+            
+            <!--Indstillinger--> 
             <Grid Margin="0 20 0 0" Height="90" HorizontalAlignment="Center" MinHeight="90" MaxHeight="90">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
@@ -94,21 +97,26 @@
 
 
 
-
+        <!--Højre side, indhold-->
         <StackPanel Grid.Column="1" Background="#2e3137">
+
+            <!--Banner billede-->
             <StackPanel>
                 <Grid>
                     <Image MinHeight="90" MaxHeight="90" Stretch="UniformToFill" StretchDirection="DownOnly" Source="Images/resizedbanner-notext.png"></Image>
-                    <TextBlock FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#abbfff" Text="Bliv Super Medlem i dag - kun kr. 79 pr. md!"></TextBlock>
+                    <TextBlock FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#abbfff" Text="Bliv Super Medlem i dag - kun kr. 79 pr. md!">
+                        <Label Content="Bliv Super Medlem i dag - kun kr. 79 pr. md!" FontSize="36" Foreground="#abbfff" Style="{StaticResource OperatorProLight}" ></Label>
+                    </TextBlock>
                 </Grid>
-                
             </StackPanel>
+
+
             <StackPanel>
-                <Frame NavigationUIVisibility="Hidden" Margin="0 35 0 0" x:Name="HomePageFrame"></Frame>
+                <Frame VerticalAlignment="Top" HorizontalAlignment="Center" NavigationUIVisibility="Hidden" Margin="0 0 0 0" x:Name="HomePageFrame"></Frame>
             </StackPanel>
+
+
         </StackPanel>
-        
-        
     </Grid>
        
     

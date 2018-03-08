@@ -4,12 +4,71 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TEC_H2_Dating"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      mc:Ignorable="d"
+      Loaded="HomePage_Loaded"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="HomePage">
     <!-- Dette er en Page, "Hjem" siden -->
 
-    <Grid>
-        <TextBlock Text="HomePage"></TextBlock>
-    </Grid>
+    
+    
+    <StackPanel Width="700" Margin="20">
+        
+        <!--Køn, postnummer og interesser grid--> 
+        <Grid Margin="10" Width="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <!--Køn--> 
+            <StackPanel Grid.Column="0">
+                <TextBlock Foreground="White" Text="Køn"></TextBlock>
+                <ComboBox>
+                    <ComboBoxItem IsSelected="True">Begge</ComboBoxItem>
+                    <ComboBoxItem>Mænd</ComboBoxItem>
+                    <ComboBoxItem>Kvinder</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            
+            <!--Postnummer-->
+            <StackPanel Grid.Column="1">
+                <TextBlock Foreground="White" Text="Postnummer"></TextBlock>
+                <ComboBox>
+                    <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            
+            <!--Interesser-->
+            <StackPanel Grid.Column="2">
+                <TextBlock Foreground="White" Text="Interesser"></TextBlock>
+                <ComboBox x:Name="dashInterestsCombobox">
+                    <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            
+            
+        </Grid>
+        
+        <!--Alder-->
+        <Grid Width="600" Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                <TextBox Margin="10 0 0 0" Text="{Binding ElementName=dashboardAgeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                <Slider Minimum="18" x:Name="dashboardAgeSlider" IsSnapToTickEnabled="True" Maximum="99" TickPlacement="BottomRight" TickFrequency="1" />
+            </DockPanel>
+
+            <Button Grid.Column="2" Content="Filtrer"></Button>
+        </Grid>
+        
+        
+        
+    </StackPanel>
+    
 </Page>
