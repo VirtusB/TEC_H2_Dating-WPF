@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Log ind" Height="350" Width="350" FontSize="14" Background="#04c582">
+    <!--Dete er et window-->
+    
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
             <Label Content="Velkomen tilbage" Foreground="White" FontSize="25" HorizontalAlignment="Center"></Label>

@@ -35,5 +35,20 @@ namespace TEC_H2_Dating
             this.Title = $"Velkommen, {LoginScreen.usernamePublic}";
 
         }
+
+        private void btnDashboardHome_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageFrame.Content = new HomePage();
+        }
+
+        private void btnDashboardMyProfile_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageFrame.Content = new MyProfilePage();
+        }
+
+        private void btnDashboardSettings_Click(object sender, RoutedEventArgs e)
+        {
+            HomePageFrame.Content = new ProfileSettingsPage();
+        }
     }
 }

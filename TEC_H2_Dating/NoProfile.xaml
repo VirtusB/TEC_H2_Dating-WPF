@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Ingen profil" Height="300" Width="300">
-    
+
+    <!--Dete er et window-->
+
     <Grid Background="#333">
         <StackPanel>
             <Label FontSize="18" Foreground="IndianRed" HorizontalAlignment="Center" Content="Du har ingen profil"></Label>

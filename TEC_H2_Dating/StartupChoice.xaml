@@ -8,6 +8,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Log ind eller opret konto" Height="350" Width="500" FontSize="14" Background="#04c582">
 
+    <!--Dete er et window-->
 
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
         

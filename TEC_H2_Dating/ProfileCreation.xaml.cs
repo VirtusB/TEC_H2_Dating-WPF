@@ -273,7 +273,7 @@ namespace TEC_H2_Dating
             // file vindue
 
             Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
-            fileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            fileDialog.Filter = "Billeder (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
 
             //fileDialog.ShowDialog(); // bliver kaldt i error tjeket lige nede under
 

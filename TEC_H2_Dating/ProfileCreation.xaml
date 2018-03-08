@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
-        Title="Profil oprettelse" Height="850" Width="800" FontSize="14" Background="#04c582">
+        Title="Profil oprettelse" Height="865" Width="800" FontSize="14" Background="#04c582">
 
+    <!--Dete er et window-->
+    
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
 
 
