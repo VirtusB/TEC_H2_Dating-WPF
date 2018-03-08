@@ -159,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript\TEC_H2_Dating.sql" />
+    <Resource Include="Images\resizedbanner-notext.png" />
+    <Resource Include="Images\resizedbanner.png" />
     <Resource Include="Images\banner.jpg" />
   </ItemGroup>
   <ItemGroup>

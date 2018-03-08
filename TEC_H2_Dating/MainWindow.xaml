@@ -47,7 +47,7 @@
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Click="btnDashboardHome_Click" x:Name="btnDashboardHome" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                    <fa:ImageAwesome Width="60" Foreground="White" Icon="Home" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <fa:ImageAwesome Width="60" Foreground="#5f6e83" Icon="Home" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Hjem"></TextBlock>
             </Grid>
@@ -58,7 +58,7 @@
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Click="btnDashboardMyProfile_Click" x:Name="btnDashboardMyProfile" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                    <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="White" Icon="User" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="#5f6e83" Icon="User" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Min Profil"></TextBlock>
             </Grid>
@@ -68,7 +68,7 @@
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Click="btnDashboardSettings_Click" x:Name="btnDashboardSettings" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                    <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="White" Icon="Gear" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="#5f6e83" Icon="Gear" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Indstillinger"></TextBlock>
             </Grid>
@@ -97,7 +97,11 @@
 
         <StackPanel Grid.Column="1" Background="#2e3137">
             <StackPanel>
-                <Image MinHeight="90" MaxHeight="90" Stretch="UniformToFill"  Source="Images/banner.jpg"></Image>
+                <Grid>
+                    <Image MinHeight="90" MaxHeight="90" Stretch="UniformToFill" StretchDirection="DownOnly" Source="Images/resizedbanner-notext.png"></Image>
+                    <TextBlock FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#abbfff" Text="Bliv Super Medlem i dag - kun kr. 79 pr. md!"></TextBlock>
+                </Grid>
+                
             </StackPanel>
             <StackPanel>
                 <Frame NavigationUIVisibility="Hidden" Margin="0 35 0 0" x:Name="HomePageFrame"></Frame>
