@@ -9,7 +9,7 @@
         Loaded="Window_Loaded"
         xml:lang="da-DK"
         WindowStartupLocation="CenterScreen"
-        Title="Dashboard" MinHeight="800" Height="800" Width="1200" MinWidth="1200">
+        Title="Dashboard" MinHeight="845" Height="845" Width="1200" MinWidth="1200">
 
     <!--Dete er et window-->
 
@@ -48,8 +48,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Click="btnDashboardHome_Click" x:Name="btnDashboardHome" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                    <fa:ImageAwesome Width="60" Foreground="#5f6e83" Icon="Home" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Button Style="{StaticResource NoHoverButton}" Click="btnDashboardHome_Click" x:Name="btnDashboardHome" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                    <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="Home" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Hjem"></TextBlock>
             </Grid>
@@ -59,7 +59,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Click="btnDashboardMyProfile_Click" x:Name="btnDashboardMyProfile" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                <Button Style="{StaticResource NoHoverButton}" Click="btnDashboardMyProfile_Click" x:Name="btnDashboardMyProfile" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
                     <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="#5f6e83" Icon="User" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Min Profil"></TextBlock>
@@ -70,7 +70,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Click="btnDashboardSettings_Click" x:Name="btnDashboardSettings" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                <Button Style="{StaticResource NoHoverButton}" Click="btnDashboardSettings_Click" x:Name="btnDashboardSettings" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
                     <fa:ImageAwesome Margin="0 0 0 15" Width="55" Foreground="#5f6e83" Icon="Gear" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Indstillinger"></TextBlock>
@@ -85,8 +85,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="90" MaxWidth="90"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Click="btnDashboardLogout_Click" x:Name="btnDashboardLogout" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
-                        <fa:ImageAwesome Margin="0 0 0 10" Width="60" Foreground="#FF005C" Icon="TimesCircle" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                    <Button Style="{StaticResource NoHoverButton}" Click="btnDashboardLogout_Click" x:Name="btnDashboardLogout" Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                        <fa:ImageAwesome  Margin="0 0 0 10" Width="60" Foreground="#FF005C" Icon="TimesCircle" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                     </Button>
                     <TextBlock Margin="0 0 0 5" VerticalAlignment="Bottom" Foreground="White" HorizontalAlignment="Center" Text="Log ud"></TextBlock>
                 </Grid>
