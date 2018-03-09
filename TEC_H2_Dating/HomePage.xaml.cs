@@ -31,9 +31,6 @@ namespace TEC_H2_Dating
             #region Hent interesser fra databasen ind i interesse-comboboxen
             var interestList = new List<string>(); // liste af interesser
 
-
-
-
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
             SqlCommand getAllInterestsCmd = new SqlCommand("SELECT interestName FROM Interests", conn);
@@ -57,6 +54,54 @@ namespace TEC_H2_Dating
 
         }
 
-        
+        private void filterProfilesButton_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
+            conn.Open();
+
+            int sexSelection1 = 5;
+            int sexSelection2 = 5;
+
+            if (sexSelect.Text == "Mænd")
+            {
+                sexSelection1 = 1;
+                sexSelection2 = 1;
+            }
+            else if (sexSelect.Text == "Kvinder")
+            {
+                sexSelection1 = 0;
+                sexSelection2 = 0;
+            }
+            else if (sexSelect.Text == "Begge")
+            {
+                sexSelection1 = 0;
+                sexSelection2 = 1;
+            }
+            else
+            {
+                MessageBox.Show("Foretrukne køn er ikke et gyldigt valg");
+                return;
+            }
+
+            string interestSelection = dashInterestsCombobox.Text;
+            string zipSelection = zipSelect.Text;
+            double ageSelection = dashboardAgeSlider.Value;
+
+            SqlCommand loadFilterProfiles = new SqlCommand(@"SELECT profilefirstname, age, zipcode, qImg.imageFile from profiles qPro 
+                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
+                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2", conn);                                         
+            loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
+            loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
+            loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+            loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
+            loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+            loadFilterProfiles.ExecuteNonQuery();
+
+            conn.Close(); // luk conn
+        }
     }
 }

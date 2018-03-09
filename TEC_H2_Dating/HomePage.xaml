@@ -25,7 +25,7 @@
             <!--Køn--> 
             <StackPanel Grid.Column="0">
                 <TextBlock Foreground="White" Text="Køn"></TextBlock>
-                <ComboBox>
+                <ComboBox x:Name="sexSelect">
                     <ComboBoxItem IsSelected="True">Begge</ComboBoxItem>
                     <ComboBoxItem>Mænd</ComboBoxItem>
                     <ComboBoxItem>Kvinder</ComboBoxItem>
@@ -34,8 +34,8 @@
             
             <!--Postnummer-->
             <StackPanel Grid.Column="1">
-                <TextBlock Foreground="White" Text="Postnummer"></TextBlock>
-                <ComboBox>
+                <TextBlock Margin ="15 0 15 0 "  Foreground="White" Text="Postnummer"></TextBlock>
+                <ComboBox x:Name="zipSelect" Margin ="15 0 15 0 ">
                     <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
@@ -47,7 +47,6 @@
                     <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-            
             
         </Grid>
         
@@ -64,7 +63,7 @@
                 <Slider Minimum="18" x:Name="dashboardAgeSlider" IsSnapToTickEnabled="True" Maximum="99" TickPlacement="BottomRight" TickFrequency="1" />
             </DockPanel>
 
-            <Button Grid.Column="2" Content="Filtrer"></Button>
+            <Button x:Name="filterProfilesButton" Grid.Column="2" Content="Filtrer" Click="filterProfilesButton_Click"></Button>
         </Grid>
         
         
