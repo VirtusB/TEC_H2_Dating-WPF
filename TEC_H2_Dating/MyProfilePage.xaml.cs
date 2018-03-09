@@ -116,6 +116,8 @@ namespace TEC_H2_Dating
                 bi.EndInit();
 
                 profileImageBox.Source = bi;
+
+                
             }
 
                 
@@ -348,10 +350,7 @@ namespace TEC_H2_Dating
                 MessageBox.Show("Fejl under opdatering");
             }
 
-            SqlCommand deleteAllPriorImg = new SqlCommand("DELETE FROM Images WHERE(Images.userID = @uID) AND(Images.created < (SELECT TOP 1 created FROM Images WHERE images.userID = @uID ORDER BY created DESC))", conn); // kommando som sletter alle images uploaded, andet end det nyeste billede
-            deleteAllPriorImg.Parameters.AddWithValue("@uID", userID);
-
-            deleteAllPriorImg.ExecuteNonQuery();
+            
 
 
             conn.Close();
@@ -436,7 +435,10 @@ namespace TEC_H2_Dating
             profileImageBox.Source = bi;
 
 
+            SqlCommand deleteAllPriorImg = new SqlCommand("DELETE FROM Images WHERE(Images.userID = @uID) AND(Images.created < (SELECT TOP 1 created FROM Images WHERE images.userID = @uID ORDER BY created DESC))", conn); // kommando som sletter alle images uploaded, andet end det nyeste billede
+            deleteAllPriorImg.Parameters.AddWithValue("@uID", userID);
 
+            deleteAllPriorImg.ExecuteNonQuery();
 
 
             conn.Close();
