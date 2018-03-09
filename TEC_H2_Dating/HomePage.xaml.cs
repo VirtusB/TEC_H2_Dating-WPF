@@ -87,7 +87,7 @@ namespace TEC_H2_Dating
             string zipSelection = zipSelect.Text;
             double ageSelection = dashboardAgeSlider.Value;
 
-            SqlCommand loadFilterProfiles = new SqlCommand(@"SELECT profilefirstname, age, zipcode, qImg.imageFile from profiles qPro 
+            SqlCommand loadFilterProfiles = new SqlCommand(@"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
                                                             FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
