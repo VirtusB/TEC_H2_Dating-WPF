@@ -22,7 +22,7 @@ namespace TEC_H2_Dating
 
         private void MyProfilePage_Loaded(object sender, RoutedEventArgs e)
         {
-            lblProfileUsername.Content = @"Bruger: {LoginScreen.usernamePublic}";
+            lblProfileUsername.Content = $"Bruger: {LoginScreen.usernamePublic}";
 
             #region Hent profil data fra databasen og sæt det ind i de korrekte tekstboks
 
@@ -96,23 +96,29 @@ namespace TEC_H2_Dating
 
             sqa.Fill(ds);
             DataRow myRow;
-            myRow = ds.Tables[0].Rows[0];
 
-            MyData = (byte[])myRow["imageFile"];
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                myRow = ds.Tables[0].Rows[0];
 
-            MemoryStream stream = new MemoryStream(MyData);
-            stream.Write(MyData, 0, MyData.Length);
-            stream.Position = 0;
-            System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            MemoryStream ms = new MemoryStream();
-            img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            ms.Seek(0, SeekOrigin.Begin);
-            bi.StreamSource = ms;
-            bi.EndInit();
+                MyData = (byte[])myRow["imageFile"];
 
-            profileImageBox.Source = bi;
+                MemoryStream stream = new MemoryStream(MyData);
+                stream.Write(MyData, 0, MyData.Length);
+                stream.Position = 0;
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stream);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                MemoryStream ms = new MemoryStream();
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                ms.Seek(0, SeekOrigin.Begin);
+                bi.StreamSource = ms;
+                bi.EndInit();
+
+                profileImageBox.Source = bi;
+            }
+
+                
 
 
 
@@ -402,6 +408,8 @@ namespace TEC_H2_Dating
             // vis billedet, ikke fra databasen i dette eksempel
             //ImageSourceConverter imgs = new ImageSourceConverter();
             //profileImageBox.SetValue(Image.SourceProperty, imgs.ConvertFromString(fileDialog.FileName.ToString()))   
+
+
 
 
             conn.Open();
