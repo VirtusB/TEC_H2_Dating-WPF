@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TEC_H2_Dating"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d"
       Loaded="HomePage_Loaded"
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="800"
       Title="HomePage">
     <!-- Dette er en Page, "Hjem" siden -->
 
@@ -14,58 +15,105 @@
     
     <StackPanel Width="700" Margin="20">
         
-        <!--Køn, postnummer og interesser grid--> 
-        <Grid Margin="10" Width="600">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <!--Køn--> 
-            <StackPanel Grid.Column="0">
-                <TextBlock Foreground="White" Text="Køn"></TextBlock>
-                <ComboBox x:Name="sexSelect">
-                    <ComboBoxItem IsSelected="True">Begge</ComboBoxItem>
-                    <ComboBoxItem>Mænd</ComboBoxItem>
-                    <ComboBoxItem>Kvinder</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            
-            <!--Postnummer-->
-            <StackPanel Grid.Column="1">
-                <TextBlock Margin ="15 0 15 0 "  Foreground="White" Text="Postnummer"></TextBlock>
-                <ComboBox x:Name="zipSelect" Margin ="15 0 15 0 ">
-                    <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            
-            <!--Interesser-->
-            <StackPanel Grid.Column="2">
-                <TextBlock Foreground="White" Text="Interesser"></TextBlock>
-                <ComboBox x:Name="dashInterestsCombobox">
-                    <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            
-        </Grid>
         
-        <!--Alder-->
-        <Grid Width="600" Margin="0 20 0 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.8*"></ColumnDefinition>
-                <ColumnDefinition Width="0.3*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <DockPanel Grid.Column="0" VerticalAlignment="Center">
-                <TextBox Margin="10 0 0 0" Text="{Binding ElementName=dashboardAgeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-                <Slider Minimum="18" x:Name="dashboardAgeSlider" IsSnapToTickEnabled="True" Maximum="99" TickPlacement="BottomRight" TickFrequency="1" />
-            </DockPanel>
+        <StackPanel>
+            <!--Køn, postnummer og interesser grid-->
+            <Grid Margin="10" Width="600">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="filterProfilesButton" Grid.Column="2" Content="Filtrer" Click="filterProfilesButton_Click"></Button>
-        </Grid>
-        
+                <!--Køn-->
+                <StackPanel Grid.Column="0">
+                    <TextBlock Foreground="White" Text="Køn"></TextBlock>
+                    <ComboBox x:Name="sexSelect">
+                        <ComboBoxItem IsSelected="True">Begge</ComboBoxItem>
+                        <ComboBoxItem>Mænd</ComboBoxItem>
+                        <ComboBoxItem>Kvinder</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--Postnummer-->
+                <StackPanel Grid.Column="1">
+                    <TextBlock Margin ="15 0 15 0 "  Foreground="White" Text="Postnummer"></TextBlock>
+                    <ComboBox x:Name="zipSelect" Margin ="15 0 15 0 ">
+                        <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                <!--Interesser-->
+                <StackPanel Grid.Column="2">
+                    <TextBlock Foreground="White" Text="Interesser"></TextBlock>
+                    <ComboBox x:Name="dashInterestsCombobox">
+                        <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+
+            <!--Alder-->
+            <Grid Width="600" Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBox Margin="10 0 0 0" Text="{Binding ElementName=dashboardAgeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                    <Slider Minimum="18" x:Name="dashboardAgeSlider" IsSnapToTickEnabled="True" Maximum="99" TickPlacement="BottomRight" TickFrequency="1" />
+                </DockPanel>
+
+                <Button x:Name="filterProfilesButton" Grid.Column="2" Content="Filtrer" Click="filterProfilesButton_Click"></Button>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel>
+            <Grid Margin="0 80 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition MinWidth="25" MaxWidth="25" Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Border Padding="8" BorderThickness="1" BorderBrush="#606265">
+                        <Image MaxHeight="425" Source="Images/portrait.jpg" x:Name="profileImageBox"></Image>
+                    </Border>
+                    <TextBlock MaxHeight="29" FontSize="22" Foreground="White" Text="Camilla, 25, Helsingør"></TextBlock>
+                </StackPanel>
+
+                <StackPanel VerticalAlignment="Top" MaxHeight="425" Grid.Column="2">
+                    <Border Padding="8" BorderThickness="1" BorderBrush="#606265">
+                        <TextBlock VerticalAlignment="Top" FontSize="18" Foreground="White" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas"></TextBlock>
+                    </Border>
+                    
+                </StackPanel>
+
+                <StackPanel Background="#363a40" Margin="0 0 0 29" VerticalAlignment="Bottom" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Margin="0 0 0 10" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                            <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="LongArrowLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                        
+                        
+                        <Button Margin="0 0 0 10" VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
+                            <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="LongArrowRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                        
+
+                    </Grid>
+                </StackPanel>
+                
+            </Grid>
+        </StackPanel>
         
         
     </StackPanel>
