@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace TEC_H2_Dating
 {
+
     /// <summary>
     /// Interaction logic for ProfileSettingsPage.xaml
     /// </summary>
@@ -22,7 +23,39 @@ namespace TEC_H2_Dating
     {
         public ProfileSettingsPage()
         {
+
             InitializeComponent();
+
+            
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        
+
+        private void lightCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save(); // gemmer "darkTheme" setting
+        }
+
+        private void lightCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();     
+        }
+
+        public void lightCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            MainWindow.Reload_Window();
+            
         }
     }
+    
+
+
+
 }

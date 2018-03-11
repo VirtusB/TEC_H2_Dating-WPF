@@ -24,10 +24,14 @@ namespace TEC_H2_Dating
         public HomePage()
         {
             InitializeComponent();
+
         }
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
+            
+
+
             #region Hent interesser fra databasen ind i interesse-comboboxen
             var interestList = new List<string>(); // liste af interesser
 

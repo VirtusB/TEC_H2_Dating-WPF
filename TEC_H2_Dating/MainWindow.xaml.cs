@@ -22,6 +22,7 @@ using TEC_H2_Dating;
 
 namespace TEC_H2_Dating
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -34,16 +35,58 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
-       
+       public static void Reload_Window()
+        {
+            GetAllWindows();
+            MainWindow MW = new MainWindow();
+            MW.Show();
 
-      
-      
+            
+            
+
+        }
+
+        public static void GetAllWindows()
+        {
+            List<Window> mywindows = new List<Window>();
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+            {
+                //App.Current.Windows[intCounter].Close();
+                mywindows.Add(App.Current.Windows[intCounter]);
+                
+                foreach (var item in mywindows)
+                {
+                    item.Hide();
+                }
+                
+            }
+
+                
+        }
+
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show($"Velkommen, {LoginScreen.usernamePublic}");
+            
 
-            // lblPublicUsername.Content = LoginScreen.usernamePublic; // HUSK
+            #region Light Theme
+
+            var converter = new System.Windows.Media.BrushConverter();
+
+            if (Properties.Settings.Default.lightTheme == true)
+            {             
+                rightSideSP.Background = (Brush)converter.ConvertFromString("#FFF");
+            }
+            else
+            {
+                rightSideSP.Background = (Brush)converter.ConvertFromString("#2e3137");
+            }
+
+
+
+            #endregion
+
 
             this.Title = $"Velkommen, {LoginScreen.usernamePublic}";
 
@@ -55,7 +98,7 @@ namespace TEC_H2_Dating
 
         private void btnDashboardHome_Click(object sender, RoutedEventArgs e)
         {
-            HomePageFrame.Content = new HomePage();
+            HomePageFrame.Content = new HomePage();     
         }
 
         private void btnDashboardMyProfile_Click(object sender, RoutedEventArgs e)

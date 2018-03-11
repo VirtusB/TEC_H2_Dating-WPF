@@ -89,22 +89,38 @@
                     <Border Padding="8" BorderThickness="1" BorderBrush="#606265">
                         <TextBlock VerticalAlignment="Top" FontSize="18" Foreground="White" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas"></TextBlock>
                     </Border>
-                    
+
+
+                    <Grid Margin="0 40 0 0" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Margin="20" VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
+                            <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="AddressCard" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                        <TextBlock HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Bottom" Grid.Column="1" Text="Camilla's Profil"></TextBlock>
+                    </Grid>
+
                 </StackPanel>
 
+                
+
                 <StackPanel Background="#363a40" Margin="0 0 0 29" VerticalAlignment="Bottom" Grid.Column="2">
-                    <Grid>
+                    <Grid VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Button Margin="0 0 0 10" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
+                        <Button VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="0">
                             <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="LongArrowLeft" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                         
                         
-                        <Button Margin="0 0 0 10" VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
+                        <Button VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
                             <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="LongArrowRight" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                         

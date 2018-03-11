@@ -105,7 +105,7 @@
 
             <StackPanel Margin="0 20 0 0" Grid.Column="1">
                 <Border BorderThickness="1" BorderBrush="#FFF">
-                    <Image x:Name="profileImageBox" MaxHeight="150" MaxWidth="150" MinHeight="150" MinWidth="15"></Image>
+                    <Image x:Name="profileImageBox" MaxHeight="210" MaxWidth="215" MinHeight="150" MinWidth="15"></Image>
                 </Border>
                 <Button Click="btnChooseProfileImage_Click" x:Name="btnChooseProfileImage" Content="Vælg billede" Background="#545d6a" Margin="60 15 60 0" Foreground="White"></Button>
             </StackPanel>

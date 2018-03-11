@@ -4,13 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TEC_H2_Dating"
+      xmlns:p="clr-namespace:TEC_H2_Dating.Properties"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ProfileSettingsPage">
     
     <!--Dette er en Page, "Indstillinger" siden-->
 
-    <Grid>
-        <TextBlock Text="Settings Page"></TextBlock>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <CheckBox Click="lightCheckbox_Click" Unchecked="lightCheckbox_Unchecked" Checked="lightCheckbox_Checked" IsChecked="{Binding lightTheme, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" x:Name="lightCheckbox" >Light Theme</CheckBox>
     </Grid>
 </Page>
