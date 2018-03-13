@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TEC_H2_Dating
 {
@@ -30,9 +31,14 @@ namespace TEC_H2_Dating
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
+        public int cCount;
+
+        public void Page_Loaded(object sender, RoutedEventArgs e)
+        {           
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
         }
 
 
@@ -52,16 +58,26 @@ namespace TEC_H2_Dating
         public void lightCheckbox_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
-
-
+            
             MainWindow MW = new MainWindow(); // initialiser nyt mainwindow
             CloseMainWindowNow();   // luk det gamle mainwindow
             MW.Show(); // vis det nye mainwindow
             MW.HomePageFrame.Content = new ProfileSettingsPage(); // sæt content til profile settings page
+            
+        }
 
 
+        public void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            cCount++;
 
         }
+
+
+
+
+
+
 
         public void CloseMainWindowNow()
         {
