@@ -87,22 +87,79 @@ namespace TEC_H2_Dating
                 return;
             }
 
+            String queryChoice = "tom";
+            SqlCommand loadFilterProfiles = new SqlCommand(queryChoice, conn);
+
             string interestSelection = dashInterestsCombobox.Text;
             string zipSelection = zipSelect.Text;
             double ageSelection = dashboardAgeSlider.Value;
 
-            SqlCommand loadFilterProfiles = new SqlCommand(@"SELECT CONCAT(profilefirstname, ' ', profilelastname)as 'Name', age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
+            #region Queries afhængig af valg
+
+            if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle")
+            {
+                queryChoice = @"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
                                                             FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
                                                             WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2", conn);                                         
-            loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
-            loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
-            loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
-            loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
-            loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+                                                            AND qPro.age = @ageSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+                loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+            }
+            else if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle")
+            {
+                queryChoice = @"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
+                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
+                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+                loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
+                loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+            }
+            else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle")
+            {
+                queryChoice = @"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
+                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                                            WHERE qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+                loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
+                loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+            }
+            else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle")
+            {
+                queryChoice = @"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
+                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                                            WHERE qPro.age = @ageSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
+                loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+                loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+            }
+            else
+            {
+                return;
+            }
+
+            #endregion
+
+
+
+
             loadFilterProfiles.ExecuteNonQuery();
 
             conn.Close(); // luk conn
