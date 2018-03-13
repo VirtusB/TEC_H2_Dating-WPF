@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -85,6 +86,7 @@
     <Compile Include="NoProfile.xaml.cs">
       <DependentUpon>NoProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profile.cs" />
     <Compile Include="ProfileCreation.xaml.cs">
       <DependentUpon>ProfileCreation.xaml</DependentUpon>
     </Compile>

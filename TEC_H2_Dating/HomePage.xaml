@@ -80,14 +80,14 @@
 
                 <StackPanel Grid.Column="0">
                     <Border Padding="8" BorderThickness="1" BorderBrush="#606265">
-                        <Image MaxHeight="425" Source="Images/portrait.jpg" x:Name="profileImageBox"></Image>
+                        <Image x:Name="hpProfileImage" MaxHeight="425" Source="Images/portrait.jpg"></Image>
                     </Border>
-                    <TextBlock MaxHeight="29" FontSize="22" Foreground="White" Text="Camilla, 25, Helsingør"></TextBlock>
+                    <TextBlock x:Name="txtProfileInfo" MaxHeight="29" FontSize="22" Foreground="White" Text="Camilla, 25, Helsingør"></TextBlock>
                 </StackPanel>
 
                 <StackPanel VerticalAlignment="Top" MaxHeight="425" Grid.Column="2">
                     <Border Padding="8" BorderThickness="1" BorderBrush="#606265">
-                        <TextBlock VerticalAlignment="Top" FontSize="18" Foreground="White" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas"></TextBlock>
+                        <TextBlock x:Name="txtProfileBio" VerticalAlignment="Top" FontSize="18" Foreground="White" TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas"></TextBlock>
                     </Border>
 
 

@@ -200,10 +200,10 @@ namespace TEC_H2_Dating
             int userID = LoginScreen.userID; // hent userID fra LoginScreen
 
             // hent alle værdier fra profilen til lokale variabler
-            string profileFornavn = this.txtProfileFirstName.Text;
-            string profileEfternavn = this.txtProfileLastName.Text;
-            string profileLand = this.txtProfileCountry.Text;
-            string profileBy = this.txtProfileCity.Text;
+            string profileFornavn = HomePage.FirstCharToUpper(this.txtProfileFirstName.Text.ToLower());
+            string profileEfternavn = HomePage.FirstCharToUpper(this.txtProfileLastName.Text.ToLower());
+            string profileLand = HomePage.FirstCharToUpper(this.txtProfileCountry.Text.ToLower());
+            string profileBy = HomePage.FirstCharToUpper(this.txtProfileCity.Text.ToLower());
             int profilePostnummer = Convert.ToInt32(this.txtProfileZipCode.Text);
             int profileAlder = Convert.ToInt32(this.txtProfileAge.Text);
             bool profileSex; // hvis true, mand, hvis false, kvinde.
