@@ -104,7 +104,7 @@ CREATE TABLE Matches (
 GO
 
 INSERT INTO Users (Username, userpassword, email)
-VALUES ('Bruger', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'brugermail@mail.com')
+VALUES ('Bruger', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'brugermail@mail.com')
 
 INSERT INTO Interests (InterestName)
 VALUES 	('Musik'),
