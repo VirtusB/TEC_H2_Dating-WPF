@@ -22,7 +22,7 @@ CREATE TABLE Users (
 	userID int IDENTITY(1,1) PRIMARY KEY,
     created datetime DEFAULT GETDATE(),
 	username nvarchar(50) NOT NULL,
-    userpassword nvarchar(64) NOT NULL,
+    userpassword nvarchar(256) NOT NULL,
     email nvarchar(320) NOT NULL
 )
 

@@ -58,8 +58,15 @@ namespace TEC_H2_Dating
 
             #region Login handler
 
-            String hashedPassword = RegisterScreen.GenerateSHA256Hash(txtPasswordLogin.Password);
-            
+            //String hashedPassword = RegisterScreen.GenerateSHA256Hash(txtPasswordLogin.Password);
+
+            String firstHalfSalt = "$ecure";
+            String secondHalfSalt = "Pa$$w0rd!";
+
+            String finalPassword = firstHalfSalt + txtPasswordLogin.Password + secondHalfSalt;
+
+            String finalHashedPassword = RegisterScreen.GenerateSHA256Hash(finalPassword);
+
 
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
@@ -71,7 +78,7 @@ namespace TEC_H2_Dating
 
                     SqlCommand verifyLogin = new SqlCommand("SELECT userID FROM Users WHERE userpassword = @uPass AND username = @uName ", conn);
 
-                    verifyLogin.Parameters.Add(new SqlParameter("@uPass", hashedPassword));
+                    verifyLogin.Parameters.Add(new SqlParameter("@uPass", finalHashedPassword));
                     verifyLogin.Parameters.Add(new SqlParameter("@uName", txtUsernameLogin.Text));
 
 

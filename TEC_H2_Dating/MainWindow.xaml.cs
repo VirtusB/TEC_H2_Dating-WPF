@@ -35,7 +35,7 @@ namespace TEC_H2_Dating
             InitializeComponent();
         }
 
-       public static void Reload_Window()
+       public static void Hide_Window()
         {
             GetAllWindows();
             MainWindow MW = new MainWindow();

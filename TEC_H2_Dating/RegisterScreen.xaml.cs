@@ -147,12 +147,21 @@ namespace TEC_H2_Dating
 
             #region Indsæt brugeren i databasen, password krypteret med SHA256
 
-            String hashedPassword = GenerateSHA256Hash(txtPasswordRegister.Password);
+            //String hashedPassword = GenerateSHA256Hash(txtPasswordRegister.Password);
+
+            String firstHalfSalt = "$ecure";
+            String secondHalfSalt = "Pa$$w0rd!";
+
+            String finalPassword = firstHalfSalt + txtPasswordRegister.Password + secondHalfSalt;
+
+            String finalHashedPassword = GenerateSHA256Hash(finalPassword);
+
+            
 
             SqlCommand addUserCmd = new SqlCommand("INSERT INTO Users (username, email, userpassword) VALUES (@usUsername, @usEmail, @usPassword)", conn);
             addUserCmd.Parameters.Add(new SqlParameter("@usUsername", txtUsernameRegister.Text));
             addUserCmd.Parameters.Add(new SqlParameter("@usEmail", txtEmailRegister.Text));
-            addUserCmd.Parameters.Add(new SqlParameter("@usPassword", hashedPassword));
+            addUserCmd.Parameters.Add(new SqlParameter("@usPassword", finalHashedPassword));
 
             addUserCmd.ExecuteNonQuery();
 
