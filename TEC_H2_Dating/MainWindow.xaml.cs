@@ -106,6 +106,8 @@ namespace TEC_H2_Dating
             HomePageFrame.Content = new MyProfilePage();
         }
 
+        
+
         private void btnDashboardSettings_Click(object sender, RoutedEventArgs e)
         {
             HomePageFrame.Content = new ProfileSettingsPage();
@@ -122,6 +124,8 @@ namespace TEC_H2_Dating
 
             if (logoutResult == MessageBoxResult.Yes)
             {
+                StartupChoice SC = new StartupChoice();
+                SC.Show();
                 this.Close();
             }
 

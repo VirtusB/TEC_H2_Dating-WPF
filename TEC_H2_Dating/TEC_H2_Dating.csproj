@@ -77,6 +77,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions.cs" />
+    <Compile Include="FullPictureView.xaml.cs">
+      <DependentUpon>FullPictureView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
     <Compile Include="StartupChoice.xaml.cs">
       <DependentUpon>StartupChoice.xaml</DependentUpon>
     </Compile>
+    <Page Include="FullPictureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScript\TEC_H2_Dating.sql" />
+    <Resource Include="Images\fz07.jpg" />
     <Resource Include="Images\portrait.jpg" />
     <Resource Include="Images\resizedbanner-notext.png" />
     <Resource Include="Images\resizedbanner.png" />

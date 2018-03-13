@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.IO.Compression;
 
 namespace TEC_H2_Dating
 {
@@ -19,6 +20,8 @@ namespace TEC_H2_Dating
         {
             InitializeComponent();
         }
+
+        public bool isPictureChosen;
 
         private void MyProfilePage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -62,33 +65,16 @@ namespace TEC_H2_Dating
             }
 
             profileReader.Close();
+            profileReader.Dispose();
 
 
             // vis profil billede fra databasen
             
-            //DataSet ds = new DataSet(); vigtig
+
             SqlDataAdapter sqa = new SqlDataAdapter("SELECT TOP 1 imageFile FROM Images WHERE userID = @uID ORDER BY CREATED DESC", conn);
             sqa.SelectCommand.Parameters.AddWithValue("@uID", userID);
 
-            /*
-            sqa.Fill(ds);
-
-
-            byte[] DBdata = (byte[])ds.Tables[0].Rows[0][0];
-            MemoryStream strm = new MemoryStream();
-            strm.Write(data, 0, data.Length);
-            strm.Position = 0;
-            System.Drawing.Image img = System.Drawing.Image.FromStream(strm);
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            MemoryStream ms = new MemoryStream();
-            img.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            ms.Seek(0, SeekOrigin.Begin);
-            bi.StreamSource = ms;
-            bi.EndInit();
-            profileImageBox.Source = bi; */
-
-            // ny test
+           
 
             DataSet ds = new DataSet();
 
@@ -115,9 +101,13 @@ namespace TEC_H2_Dating
                 bi.StreamSource = ms;
                 bi.EndInit();
 
+                
+
                 profileImageBox.Source = bi;
 
+
                 
+
             }
 
                 
@@ -126,6 +116,7 @@ namespace TEC_H2_Dating
 
 
             conn.Close();
+            conn.Dispose();
 
             #endregion
 
@@ -287,20 +278,39 @@ namespace TEC_H2_Dating
                 txtProfileBio.Focus();
                 return;
             }
+            else if (txtProfileBio.Text.Length < 1)
+            {
+                MessageBox.Show("Beskrivelse må ikke være tom");
+                txtProfileBio.Focus();
+                return;
+            }
 
             #endregion
 
+            #region Image
+
+            if (isPictureChosen == false)
+            {
+                MessageBox.Show("Du skal vælge et billede. Mindst 10KB, max 250KB");
+                return;
+            }
+
             #endregion
+
+
+            #endregion
+
+
 
             #region Indsæt profilen i databasen
 
             int userID = LoginScreen.userID; // hent userID fra LoginScreen
 
             // hent alle værdier fra profilen til lokale variabler
-            string profileFornavn = this.txtProfileFirstName.Text;
-            string profileEfternavn = this.txtProfileLastName.Text;
-            string profileLand = this.txtProfileCountry.Text;
-            string profileBy = this.txtProfileCity.Text;
+            string profileFornavn = HomePage.FirstCharToUpper(this.txtProfileFirstName.Text.ToLower());
+            string profileEfternavn = HomePage.FirstCharToUpper(this.txtProfileLastName.Text.ToLower());
+            string profileLand = HomePage.FirstCharToUpper(this.txtProfileCountry.Text.ToLower());
+            string profileBy = HomePage.FirstCharToUpper(this.txtProfileCity.Text.ToLower());
             int profilePostnummer = Convert.ToInt32(this.txtProfileZipCode.Text);
             int profileAlder = Convert.ToInt32(this.txtProfileAge.Text);
             bool profileSex; // hvis true, mand, hvis false, kvinde.
@@ -354,9 +364,13 @@ namespace TEC_H2_Dating
 
 
             conn.Close();
+            conn.Dispose();
 
             #endregion
         }
+
+
+
 
         private void btnChooseProfileImage_Click(object sender, RoutedEventArgs e)
         {
@@ -376,15 +390,40 @@ namespace TEC_H2_Dating
             if (fileDialog.ShowDialog() == false)
             {
                 MessageBox.Show("Billedet må ikke være tomt");
+                isPictureChosen = false;
                 return;
+            }
+            else
+            {
+                isPictureChosen = true;
             }
 
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
 
 
-
-
             byte[] data = new byte[fs.Length];
+
+
+
+
+
+            
+
+
+
+            if (data.Length > 250000)
+            {
+                int imgSize = data.Length / 1000;
+                MessageBox.Show($"Billedet er for stort. Max 250KB, det valgte billede fylder {imgSize}KB");
+                return;
+            }
+            else if (data.Length < 10000)
+            {
+                int imgSize = data.Length / 1000;
+                MessageBox.Show($"Billedet er for småt. Mindst 10KB, det valgte billede fylder {imgSize}KB");
+                return;
+            }
+
             fs.Read(data, 0, System.Convert.ToInt32(fs.Length));
 
             fs.Close(); // luk file stream
@@ -420,6 +459,8 @@ namespace TEC_H2_Dating
             sqa.Fill(ds);
 
 
+
+
             byte[] DBdata = (byte[])ds.Tables[0].Rows[0][0];
             MemoryStream strm = new MemoryStream();
             strm.Write(data, 0, data.Length);
@@ -442,6 +483,12 @@ namespace TEC_H2_Dating
 
 
             conn.Close();
+
+        }
+
+        private void MyProfilePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

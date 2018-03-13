@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 
 namespace TEC_H2_Dating
@@ -33,6 +26,8 @@ namespace TEC_H2_Dating
             lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
 
         }
+
+        public bool isPictureChosen;
 
         // Tjek username og password
         public void btnProfileCreate_Click(object sender, RoutedEventArgs e)
@@ -190,6 +185,22 @@ namespace TEC_H2_Dating
                 txtProfileBio.Focus();
                 return;
             }
+            else if (txtProfileBio.Text.Length < 1)
+            {
+                MessageBox.Show("Beskrivelse må ikke være tom");
+                txtProfileBio.Focus();
+                return;
+            }
+
+            #endregion
+
+            #region Image
+
+            if (isPictureChosen == false)
+            {
+                MessageBox.Show("Du skal vælge et billede. Mindst 10KB, max 250KB");
+                return;
+            }
 
             #endregion
 
@@ -266,6 +277,12 @@ namespace TEC_H2_Dating
             #endregion
         }
 
+
+
+
+
+
+
         private void btnChooseProfileImage_Click(object sender, RoutedEventArgs e)
         {
             int userID = LoginScreen.userID; // hent userID fra LoginScreen
@@ -284,7 +301,12 @@ namespace TEC_H2_Dating
             if (fileDialog.ShowDialog() == false)
             {
                 MessageBox.Show("Billedet må ikke være tomt");
+                isPictureChosen = false;
                 return;
+            }
+            else
+            {
+                isPictureChosen = true;
             }
 
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
@@ -293,6 +315,26 @@ namespace TEC_H2_Dating
             
 
             byte[] data = new byte[fs.Length];
+
+
+            
+
+
+            if (data.Length > 250000)
+            {
+                int imgSize = data.Length / 1000;
+                MessageBox.Show($"Billedet er for stort. Max 250KB, det valgte billede fylder {imgSize}KB");
+                return;
+            }
+            else if (data.Length < 10000)
+            {
+                int imgSize = data.Length / 1000;
+                MessageBox.Show($"Billedet er for småt. Mindst 10KB, det valgte billede fylder {imgSize}KB");
+                return;
+            }
+
+
+
             fs.Read(data, 0, System.Convert.ToInt32(fs.Length));
 
             fs.Close(); // luk file stream

@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:TEC_H2_Dating"
       mc:Ignorable="d" 
       Loaded="MyProfilePage_Loaded"
+      KeepAlive="False"
+      Unloaded="MyProfilePage_Unloaded"
       d:DesignHeight="800" d:DesignWidth="800"
       Title="MyProfilePage">
     
@@ -125,7 +127,7 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
-            <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Padding="0 0 0 100"  Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="100" TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
         </StackPanel>
         <Button Click="btnUpdateProfil_Click" x:Name="btnUpdateProfil"  Content="Opdater" Margin="140 15" Padding="10" Background="#545d6a" Foreground="White"></Button>
 

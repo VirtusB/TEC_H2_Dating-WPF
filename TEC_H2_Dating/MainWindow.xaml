@@ -9,7 +9,7 @@
         Loaded="Window_Loaded"
         xml:lang="da-DK"
         WindowStartupLocation="CenterScreen"
-        Title="Dashboard" MinHeight="860" Height="845" Width="1200" MinWidth="1200">
+        Title="Dashboard" MinHeight="950" Height="845" Width="1200" MinWidth="1200">
 
     <!--Dete er et window-->
 

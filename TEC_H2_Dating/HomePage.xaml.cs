@@ -72,6 +72,8 @@ namespace TEC_H2_Dating
         }
 
 
+        public List<Profile> listOfProfiles = new List<Profile>(); // liste af profiler
+
 
         private void filterProfilesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -165,7 +167,7 @@ namespace TEC_H2_Dating
 
 
 
-            var listOfProfiles = new List<Profile>(); // liste af profiler
+            
 
 
 
@@ -201,13 +203,46 @@ namespace TEC_H2_Dating
             strm.Seek(0, SeekOrigin.Begin);
             bi.StreamSource = strm;
             bi.EndInit();
-            hpProfileImage.Source = bi;
+            hpProfileImage.Source = bi; // sæt profil billede
+        
+            txtProfileBio.Text = listOfProfiles[0].ProfileBio; // sæt beskrivelse
+            txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}"; // sæt fornavn, alder, by
+            txtTextBtn.Text = $"Vis {listOfProfiles[0].FirstName}'s Profil"; // sæt teksten som står under vis profil knappen, altså f.eks. "Vis Camilla's Profil"
 
-
-            txtProfileBio.Text = listOfProfiles[0].ProfileBio;
-            txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}";
 
             conn.Close(); // luk conn
+            conn.Dispose();
+        }
+
+        private void HomePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnHPimage_Click(object sender, RoutedEventArgs e)
+        {
+            // vis fulde billede i nyt vindue
+            FullPictureView FPV = new FullPictureView();
+            FPV.FPVimage.Source = hpProfileImage.Source;
+            FPV.Show();
+        }
+
+        public int sharedI = 0; // bruges til indeksering af Profile liste
+
+        private void btnIncrementSearch_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = sharedI; i < listOfProfiles.Count; i++)
+            {
+                txtProfileBio.Text = listOfProfiles[i].ProfileBio;
+            }
+        }
+
+        private void btnDecrementSearch_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = sharedI; i < listOfProfiles.Count; i--)
+            {
+                txtProfileBio.Text = listOfProfiles[i].ProfileBio;
+            }
         }
     }
 }
