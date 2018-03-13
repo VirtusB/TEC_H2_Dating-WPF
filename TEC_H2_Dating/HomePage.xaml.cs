@@ -88,7 +88,8 @@ namespace TEC_H2_Dating
             }
 
             String queryChoice = "tom";
-            SqlCommand loadFilterProfiles = new SqlCommand(queryChoice, conn);
+
+            SqlCommand loadFilterProfiles;
 
             string interestSelection = dashInterestsCombobox.Text;
             string zipSelection = zipSelect.Text;
@@ -98,17 +99,37 @@ namespace TEC_H2_Dating
 
             if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle")
             {
+
                 queryChoice = @"SELECT profilefirstname, age, zipcode, qImg.imageFile, Profilebio from profiles qPro 
                                                             FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
                                                             WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age = @ageSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                                                            AND qPro.age = @ageSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles = new SqlCommand(queryChoice, conn);
                 loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
                 loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+
+                SqlDataReader profileReader = loadFilterProfiles.ExecuteReader();
+
+                if (!profileReader.HasRows)
+                {
+                    MessageBox.Show("Ingen profiler fundet, nedsæt søgekrititer");
+                    return;
+                }
+                else
+                {
+                    while (profileReader.Read())
+                    {
+                        MessageBox.Show(profileReader.GetString(0));
+                        MessageBox.Show(profileReader.GetInt32(1).ToString());
+                    }
+                }
+
+
             }
             else if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle")
             {
@@ -117,13 +138,12 @@ namespace TEC_H2_Dating
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
-                loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
+                                                            WHERE qPro.age = @ageSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles = new SqlCommand(queryChoice, conn);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
-                loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
                 loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+                loadFilterProfiles.ExecuteNonQuery();
             }
             else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle")
             {
@@ -132,11 +152,13 @@ namespace TEC_H2_Dating
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                                                            WHERE qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles = new SqlCommand(queryChoice, conn);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
                 loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
                 loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+                loadFilterProfiles.ExecuteNonQuery();
             }
             else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle")
             {
@@ -145,10 +167,19 @@ namespace TEC_H2_Dating
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age = @ageSel AND qPro.age BETWEEN @sexSel1 AND @sexSel2";
+                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
+                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                loadFilterProfiles = new SqlCommand(queryChoice, conn);
+                loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
                 loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
+                loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
                 loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
+                loadFilterProfiles.ExecuteNonQuery();
+            }
+            else if ( 1 == 1)
+            {
+                MessageBox.Show("Hej");
             }
             else
             {
@@ -160,7 +191,7 @@ namespace TEC_H2_Dating
 
 
 
-            loadFilterProfiles.ExecuteNonQuery();
+            //loadFilterProfiles.ExecuteNonQuery();
 
             conn.Close(); // luk conn
         }
