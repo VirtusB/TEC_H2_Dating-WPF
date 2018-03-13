@@ -124,3 +124,14 @@ VALUES 	('Musik'),
 		('Fitness')
 
 GO
+
+Create Index IX_Profiles_Age
+ON Profiles (Age ASC)
+
+Create Index IX_Profiles_ZipCode
+ON Profiles (Zipcode ASC)
+
+Create Index IX_Profiles_Sex
+ON Profiles (Sex ASC)
+
+GO
