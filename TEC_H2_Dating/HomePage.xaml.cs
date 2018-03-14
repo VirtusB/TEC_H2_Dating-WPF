@@ -203,7 +203,7 @@ namespace TEC_H2_Dating
             strm.Seek(0, SeekOrigin.Begin);
             bi.StreamSource = strm;
             bi.EndInit();
-            hpProfileImage.Source = bi; // sæt profil billede
+            hpProfileImage.Source = bi;
         
             txtProfileBio.Text = listOfProfiles[0].ProfileBio; // sæt beskrivelse
             txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}"; // sæt fornavn, alder, by
@@ -227,22 +227,64 @@ namespace TEC_H2_Dating
             FPV.Show();
         }
 
-        public int sharedI = 0; // bruges til indeksering af Profile liste
+        public int _I = 0; // bruges til indeksering af Profile liste
 
-        private void btnIncrementSearch_Click(object sender, RoutedEventArgs e)
+        public void btnIncrementSearch_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = sharedI; i < listOfProfiles.Count; i++)
+            _I++;
+            if (_I > listOfProfiles.Count - 1)
             {
-                txtProfileBio.Text = listOfProfiles[i].ProfileBio;
+                _I--;
+                MessageBox.Show("Ikke flere matches");
+                return;
             }
+            else
+            {
+                txtProfileBio.Text = listOfProfiles[_I].ProfileBio;
+                txtProfileInfo.Text = $"{listOfProfiles[_I].FirstName}, {listOfProfiles[_I].Age.ToString()}, {listOfProfiles[_I].City}";
+                txtTextBtn.Text = $"Vis {listOfProfiles[_I].FirstName}'s Profil";
+
+                // profil billede
+                MemoryStream strm = new MemoryStream(listOfProfiles[_I].ProfileImage);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                strm.Seek(0, SeekOrigin.Begin);
+                bi.StreamSource = strm;
+                bi.EndInit();
+                hpProfileImage.Source = bi;
+            }
+    
+            
         }
 
-        private void btnDecrementSearch_Click(object sender, RoutedEventArgs e)
+        public void btnDecrementSearch_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = sharedI; i < listOfProfiles.Count; i--)
+            _I--;
+
+            if (_I < 0)
             {
-                txtProfileBio.Text = listOfProfiles[i].ProfileBio;
+                _I++;
+                MessageBox.Show("Ikke flere matches");
+                return;
             }
+            else
+            {
+                txtProfileBio.Text = listOfProfiles[_I].ProfileBio;
+                txtProfileInfo.Text = $"{listOfProfiles[_I].FirstName}, {listOfProfiles[_I].Age.ToString()}, {listOfProfiles[_I].City}";
+                txtTextBtn.Text = $"Vis {listOfProfiles[_I].FirstName}'s Profil";
+
+                // profil billede
+                MemoryStream strm = new MemoryStream(listOfProfiles[_I].ProfileImage);
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                strm.Seek(0, SeekOrigin.Begin);
+                bi.StreamSource = strm;
+                bi.EndInit();
+                hpProfileImage.Source = bi;
+            }
+
+         
+            
         }
     }
 }
