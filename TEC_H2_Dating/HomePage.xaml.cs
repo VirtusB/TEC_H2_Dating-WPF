@@ -80,6 +80,9 @@ namespace TEC_H2_Dating
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
             conn.Open();
 
+            #region Gender selection
+
+            //Sætter parametre til senere brug i query til valg af køn
             int sexSelection1 = 5;
             int sexSelection2 = 5;
 
@@ -104,11 +107,15 @@ namespace TEC_H2_Dating
                 return;
             }
 
+            #endregion
+
             String queryChoice = "EMPTY";
 
             SqlCommand loadFilterProfiles;
 
+            #region All the queries
 
+            //Queries vælger forskellige data afhængigt af om man har valgt specific interesse/postnummer eller alle
 
             if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle") // alle postnumre, specifik interesse
             {
@@ -118,7 +125,7 @@ namespace TEC_H2_Dating
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
                                                             WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age = @ageSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                                            AND qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
             }
             else if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle") // alle postnumre, alle interesser
             {
@@ -127,7 +134,7 @@ namespace TEC_H2_Dating
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age = @ageSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                                            WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
             }
             else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle") // specifikt postnummer, alle interesser
             {
@@ -136,7 +143,7 @@ namespace TEC_H2_Dating
                                                             FULL JOIN Images qImg ON qPro.userID = qImg.userID 
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                                            WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
             }
             else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle") // specifikt postnummer, specifik interesse
             {
@@ -146,12 +153,15 @@ namespace TEC_H2_Dating
                                                             FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
                                                             FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
                                                             WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age = @ageSel AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                                            AND qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
             }
+
+            #endregion
 
             string interestSelection = dashInterestsCombobox.Text;
             string zipSelection = zipSelect.Text;
-            double ageSelection = dashboardAgeSlider.Value;
+            double ageSelectionMin = dashboardAgeSlider.Value;
+            double ageSelectionMax = dashboardAgeSliderMax.Value;
 
 
             loadFilterProfiles = new SqlCommand(queryChoice, conn);
@@ -159,20 +169,10 @@ namespace TEC_H2_Dating
             loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
             loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
             loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
-            loadFilterProfiles.Parameters.AddWithValue("@ageSel", ageSelection);
-
-
+            loadFilterProfiles.Parameters.AddWithValue("@ageSel1", ageSelectionMin);
+            loadFilterProfiles.Parameters.AddWithValue("@ageSel2", ageSelectionMax);
 
             SqlDataReader profileReader = loadFilterProfiles.ExecuteReader();
-
-
-
-            
-
-
-
-
-
 
             if (!profileReader.HasRows)
             {
@@ -191,10 +191,7 @@ namespace TEC_H2_Dating
                         ProfileBio = profileReader.GetString(4),
                         ProfileImage = (byte[])profileReader["imageFile"]
                     });
-                }
-
-
-                        
+                }                      
             }
 
             MemoryStream strm = new MemoryStream(listOfProfiles[0].ProfileImage);
@@ -208,7 +205,6 @@ namespace TEC_H2_Dating
             txtProfileBio.Text = listOfProfiles[0].ProfileBio; // sæt beskrivelse
             txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}"; // sæt fornavn, alder, by
             txtTextBtn.Text = $"Vis {listOfProfiles[0].FirstName}'s Profil"; // sæt teksten som står under vis profil knappen, altså f.eks. "Vis Camilla's Profil"
-
 
             conn.Close(); // luk conn
             conn.Dispose();
@@ -252,9 +248,7 @@ namespace TEC_H2_Dating
                 bi.StreamSource = strm;
                 bi.EndInit();
                 hpProfileImage.Source = bi;
-            }
-    
-            
+            }         
         }
 
         public void btnDecrementSearch_Click(object sender, RoutedEventArgs e)
@@ -282,9 +276,6 @@ namespace TEC_H2_Dating
                 bi.EndInit();
                 hpProfileImage.Source = bi;
             }
-
-         
-            
         }
     }
 }
