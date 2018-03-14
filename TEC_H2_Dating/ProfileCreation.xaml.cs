@@ -118,23 +118,6 @@ namespace TEC_H2_Dating
             }
             #endregion
 
-            #region Zip
-
-            if (txtProfileZipCode.Text.Length != 4)
-            {
-                MessageBox.Show("Postnummer skal være 4 karakterer.");
-                txtProfileZipCode.Focus();
-                return;
-            }
-            else if (txtProfileZipCode.Text.Any(char.IsLetter))
-            {
-                MessageBox.Show("Postnummer må kun indeholde tal");
-                txtProfileZipCode.Focus();
-                return;
-            }
-
-            #endregion
-
             #region Age
 
             if (txtProfileAge.Text.Any(char.IsLetter))
@@ -215,7 +198,7 @@ namespace TEC_H2_Dating
             string profileEfternavn = HomePage.FirstCharToUpper(this.txtProfileLastName.Text.ToLower());
             string profileLand = HomePage.FirstCharToUpper(this.txtProfileCountry.Text.ToLower());
             string profileBy = HomePage.FirstCharToUpper(this.txtProfileCity.Text.ToLower());
-            int profilePostnummer = Convert.ToInt32(this.txtProfileZipCode.Text);
+            string profileRegion = this.txtProfileRegion.Text;
             int profileAlder = Convert.ToInt32(this.txtProfileAge.Text);
             bool profileSex; // hvis true, mand, hvis false, kvinde.
             string profileBio = this.txtProfileBio.Text;
@@ -240,7 +223,8 @@ namespace TEC_H2_Dating
 
             conn.Open();
 
-            SqlCommand insertProfile = new SqlCommand("INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, zipcode) VALUES (@uID, @fName, @lName, @pBio, @pSex, @pAge, @pCountry, @pCity, @pZip)", conn);
+
+            SqlCommand insertProfile = new SqlCommand("INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, (SELECT regionid FROM regions where regionName = @pRegion) ) VALUES (@uID, @fName, @lName, @pBio, @pSex, @pAge, @pCountry, @pCity, @pRegion)", conn);
 
             // tilføj alle lokale variabler til sql kommandoen
             insertProfile.Parameters.Add(new SqlParameter("@uID", userID));
@@ -251,7 +235,7 @@ namespace TEC_H2_Dating
             insertProfile.Parameters.Add(new SqlParameter("@pAge", profileAlder));
             insertProfile.Parameters.Add(new SqlParameter("@pCountry", profileLand));
             insertProfile.Parameters.Add(new SqlParameter("@pCity", profileBy));
-            insertProfile.Parameters.Add(new SqlParameter("@pZip", profilePostnummer));
+            insertProfile.Parameters.Add(new SqlParameter("@pRegion", profileRegion));
 
 
             if (insertProfile.ExecuteNonQuery() == 1)

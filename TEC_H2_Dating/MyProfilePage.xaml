@@ -65,8 +65,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock HorizontalAlignment="Center" Foreground="White" Text="Postnummer"></TextBlock>
-                <TextBox x:Name="txtProfileZipCode" Margin="5" Grid.Column="0" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
+                <TextBlock HorizontalAlignment="Center" Foreground="White" Text="Region"></TextBlock>
+                <ComboBox x:Name="txtProfileRegion" Margin="5" Grid.Column="0" Background="#545d6a" Foreground="White" FontSize="18"></ComboBox>
             </StackPanel>
 
             <StackPanel Grid.Column="1">

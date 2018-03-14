@@ -35,7 +35,11 @@ namespace TEC_H2_Dating
 
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
-            SqlCommand getProfileData = new SqlCommand("SELECT profileFirstName, profileLastName, country, city, zipcode, age, sex, profileBio FROM Profiles WHERE Profiles.userID = @uID", conn);
+            SqlCommand getProfileData = new SqlCommand(@"SELECT profileFirstName, profileLastName, country, city, qReg.RegionName, age, sex, profileBio 
+                                                            FROM Profiles qPro
+                                                            FULL JOIN Regions qReg ON qPro.regionId = qReg.regionID
+                                                            WHERE qPro.userID = @uID", conn);
+
             getProfileData.Parameters.Add(new SqlParameter("@uID", userID));
 
             conn.Open();
@@ -48,7 +52,7 @@ namespace TEC_H2_Dating
                 txtProfileLastName.Text = profileReader.GetString(1);
                 txtProfileCountry.Text = profileReader.GetString(2);
                 txtProfileCity.Text = profileReader.GetString(3);
-                txtProfileZipCode.Text = profileReader.GetInt32(4).ToString();
+                txtProfileRegion.Text = profileReader.GetString(4);
                 txtProfileAge.Text = profileReader.GetInt32(5).ToString();
 
                 if (profileReader.GetBoolean(6) == false)
@@ -211,22 +215,6 @@ namespace TEC_H2_Dating
             }
             #endregion
 
-            #region Zip
-
-            if (txtProfileZipCode.Text.Length != 4)
-            {
-                MessageBox.Show("Postnummer skal være 4 karakterer.");
-                txtProfileZipCode.Focus();
-                return;
-            }
-            else if (txtProfileZipCode.Text.Any(char.IsLetter))
-            {
-                MessageBox.Show("Postnummer må kun indeholde tal");
-                txtProfileZipCode.Focus();
-                return;
-            }
-
-            #endregion
 
             #region Age
 
@@ -311,7 +299,7 @@ namespace TEC_H2_Dating
             string profileEfternavn = HomePage.FirstCharToUpper(this.txtProfileLastName.Text.ToLower());
             string profileLand = HomePage.FirstCharToUpper(this.txtProfileCountry.Text.ToLower());
             string profileBy = HomePage.FirstCharToUpper(this.txtProfileCity.Text.ToLower());
-            int profilePostnummer = Convert.ToInt32(this.txtProfileZipCode.Text);
+            string profileRegion = this.txtProfileRegion.Text;
             int profileAlder = Convert.ToInt32(this.txtProfileAge.Text);
             bool profileSex; // hvis true, mand, hvis false, kvinde.
             string profileBio = this.txtProfileBio.Text;
@@ -336,7 +324,7 @@ namespace TEC_H2_Dating
 
             conn.Open();
 
-            SqlCommand updateProfile = new SqlCommand("UPDATE Profiles SET profileFirstName = @fName, profileLastName = @lName, profileBio = @pBio, sex = @pSex, age = @pAge, country = @pCountry, city = @pCity, zipcode = @pZip WHERE Profiles.userID = @uID", conn);
+            SqlCommand updateProfile = new SqlCommand("UPDATE Profiles SET profileFirstName = @fName, profileLastName = @lName, profileBio = @pBio, sex = @pSex, age = @pAge, country = @pCountry, city = @pCity, regionId = (SELECT RegionID from Regions WHERE regionName = @pRegion) WHERE Profiles.userID = @uID", conn);
 
             // tilføj alle lokale variabler til sql kommandoen
             updateProfile.Parameters.Add(new SqlParameter("@uID", userID));
@@ -347,7 +335,7 @@ namespace TEC_H2_Dating
             updateProfile.Parameters.Add(new SqlParameter("@pAge", profileAlder));
             updateProfile.Parameters.Add(new SqlParameter("@pCountry", profileLand));
             updateProfile.Parameters.Add(new SqlParameter("@pCity", profileBy));
-            updateProfile.Parameters.Add(new SqlParameter("@pZip", profilePostnummer));
+            updateProfile.Parameters.Add(new SqlParameter("@pRegion", profileRegion));
 
 
             if (updateProfile.ExecuteNonQuery() == 1)
@@ -493,8 +481,8 @@ namespace TEC_H2_Dating
 
         private void btnInteresserProfil_Click(object sender, RoutedEventArgs e)
         {
-            ChooseProfileInterests CPS = new ChooseProfileInterests();
-            CPS.Show();
+            /*ChooseProfileInterests CPS = new ChooseProfileInterests();
+            CPS.Show();*/
         }
     }
 }
