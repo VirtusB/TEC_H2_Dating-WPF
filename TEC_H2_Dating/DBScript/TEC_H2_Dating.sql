@@ -105,6 +105,11 @@ GO
 
 INSERT INTO Users (Username, userpassword, email)
 VALUES ('Bruger', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'brugermail@mail.com')
+GO
+
+INSERT INTO Users (Username, userpassword, email)
+VALUES ('Bruger2', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'bruger2mail@mail.com')
+GO
 
 INSERT INTO Interests (InterestName)
 VALUES 	('Musik'),
@@ -125,13 +130,20 @@ VALUES 	('Musik'),
 
 GO
 
+INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, zipcode)
+VALUES (1, 'Bruger', 'brugeren', 'min bio', 1, 19, 'Danmark', 'Snekkersten', '3070')
+
+GO
+
+INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, zipcode)
+VALUES (2, 'Brugerto', 'brugerento', 'bruger2 min bio', 1, 19, 'Danmark', 'Snekkersten', '3070')
+
+GO
+
 Create Index IX_Profiles_Age
 ON Profiles (Age ASC)
 
 Create Index IX_Profiles_ZipCode
 ON Profiles (Zipcode ASC)
 
-Create Index IX_Profiles_Sex
-ON Profiles (Sex ASC)
 
-GO
