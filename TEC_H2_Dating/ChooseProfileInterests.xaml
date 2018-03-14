@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TEC_H2_Dating"
         mc:Ignorable="d"
+        x:Name="CPIwindow"
         WindowStartupLocation="CenterScreen"
         Loaded="ChooseProfileInterestsWindow_Loaded"
         Title="ChooseProfileInterests" Height="600" Width="600">
@@ -16,8 +17,10 @@
             <WrapPanel HorizontalAlignment="Center" x:Name="interestsWrapPanel" Height="400" Orientation="Vertical" >
             </WrapPanel>
 
-            <Button MaxWidth="150" x:Name="btnProfileUpdateInterests" Padding="15" Margin="0 25 0 0" Background="#545d6a" Foreground="White" Content="Opdater interesser"></Button>
-
+            <Button Click="btnProfileUpdateInterests_Click" MaxWidth="150" x:Name="btnProfileUpdateInterests" Padding="15" Margin="0 25 0 0" Background="#545d6a" Foreground="White" Content="Opdater interesser"></Button>
+            <CheckBox>hej</CheckBox>
+            
+           
 
         </StackPanel>
        

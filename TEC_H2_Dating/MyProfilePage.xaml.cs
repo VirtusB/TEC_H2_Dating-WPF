@@ -69,7 +69,6 @@ namespace TEC_H2_Dating
                 txtProfileLastName.Text = profileReader.GetString(1);
                 txtProfileCountry.Text = profileReader.GetString(2);
                 txtProfileCity.Text = profileReader.GetString(3);
-                //txtProfileRegion.Text = profileReader.GetString(4);
                 txtProfileRegion.SelectedItem = profileReader.GetString(4);
                 txtProfileAge.Text = profileReader.GetInt32(5).ToString();
 
@@ -293,15 +292,7 @@ namespace TEC_H2_Dating
 
             #endregion
 
-            #region Image
-
-            if (isPictureChosen == false)
-            {
-                MessageBox.Show("Du skal vælge et billede. Mindst 10KB, max 250KB");
-                return;
-            }
-
-            #endregion
+            
 
 
             #endregion
@@ -396,13 +387,9 @@ namespace TEC_H2_Dating
             if (fileDialog.ShowDialog() == false)
             {
                 MessageBox.Show("Billedet må ikke være tomt");
-                isPictureChosen = false;
                 return;
             }
-            else
-            {
-                isPictureChosen = true;
-            }
+            
 
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
 
@@ -499,8 +486,8 @@ namespace TEC_H2_Dating
 
         private void btnInteresserProfil_Click(object sender, RoutedEventArgs e)
         {
-            /*ChooseProfileInterests CPS = new ChooseProfileInterests();
-            CPS.Show();*/
+            ChooseProfileInterests CPS = new ChooseProfileInterests();
+            CPS.Show();
         }
     }
 }

@@ -35,6 +35,7 @@ namespace TEC_H2_Dating
 
         public static string usernamePublic = "";
         public static int userID = 0;
+        public static int profileID = 0;
 
         // Tjek username og password
         public void btnLoginSubmit_Click(object sender, RoutedEventArgs e)
@@ -100,6 +101,7 @@ namespace TEC_H2_Dating
                         profileExistence.Parameters.Add(new SqlParameter("@uID", userID));
 
                         object profileIDExist = profileExistence.ExecuteScalar();
+                        profileID = (int)profileIDExist;
 
                         if (profileIDExist == null)
                         {

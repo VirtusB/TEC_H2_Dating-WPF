@@ -94,6 +94,8 @@ namespace TEC_H2_Dating
 
         private void filterProfilesButton_Click(object sender, RoutedEventArgs e)
         {
+            listOfProfiles.Clear();
+
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
             conn.Open();
 
@@ -259,6 +261,7 @@ namespace TEC_H2_Dating
 
         public void btnIncrementSearch_Click(object sender, RoutedEventArgs e)
         {
+            int hey = listOfProfiles.Count;
             _I++;
             if (_I > listOfProfiles.Count - 1)
             {
