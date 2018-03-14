@@ -115,51 +115,66 @@ namespace TEC_H2_Dating
 
             #region All the queries
 
-            //Queries vælger forskellige data afhængigt af om man har valgt specific interesse/postnummer eller alle
+            //Queries vælger forskellige data afhængigt af om man har valgt specific interesse/regioner eller alle
 
-            if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle") // alle postnumre, specifik interesse
+            if (regSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle") // alle regioner, specifik interesse
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio from profiles qPro 
-                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
-                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
-                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
-                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                                    FROM profiles qPro 
+                                    FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                    FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                    FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                    FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                    FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
+                                    WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
+                                    AND qPro.age BETWEEN @ageSel1 AND @ageSel2 
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+
             }
-            else if (zipSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle") // alle postnumre, alle interesser
+            else if (regSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle") // alle regioner, alle interesser
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio from profiles qPro 
-                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
-                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
-                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
-                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                                    FROM profiles qPro 
+                                    FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                    FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                    FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                    FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                    FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
+                                    WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
             }
-            else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle") // specifikt postnummer, alle interesser
+            else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle") // specifik regin, alle interesser
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio from profiles qPro 
-                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
-                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
-                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
-                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                                    FROM profiles qPro 
+                                    FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                    FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                    FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                    FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                    FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
+                                    WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
+                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)";
             }
-            else if (zipSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle") // specifikt postnummer, specifik interesse
+            else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle") // specifik region, specifik interesse
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio from profiles qPro 
-                                                            FULL JOIN Users qUse ON qPro.userID = qUse.userID 
-                                                            FULL JOIN Images qImg ON qPro.userID = qImg.userID 
-                                                            FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
-                                                            FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
-                                                            WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
-                                                            AND qPro.age BETWEEN @ageSel1 AND @ageSel2 AND qPro.zipcode = @zipSel AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                                    FROM profiles qPro 
+                                    FULL JOIN Users qUse ON qPro.userID = qUse.userID 
+                                    FULL JOIN Images qImg ON qPro.userID = qImg.userID 
+                                    FULL JOIN RS_ProfileInterests qRS ON qRS.profileID = qPro.profileID 
+                                    FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
+                                    FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
+                                    WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
+                                    AND qPro.age BETWEEN @ageSel1 AND @ageSel2 
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
+                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)";
             }
 
             #endregion
 
             string interestSelection = dashInterestsCombobox.Text;
-            string zipSelection = zipSelect.Text;
+            string regSelection = regSelect.Text;
             double ageSelectionMin = dashboardAgeSlider.Value;
             double ageSelectionMax = dashboardAgeSliderMax.Value;
 
@@ -168,7 +183,7 @@ namespace TEC_H2_Dating
             loadFilterProfiles.Parameters.AddWithValue("@intSel", interestSelection);
             loadFilterProfiles.Parameters.AddWithValue("@sexSel1", sexSelection1);
             loadFilterProfiles.Parameters.AddWithValue("@sexSel2", sexSelection2);
-            loadFilterProfiles.Parameters.AddWithValue("@zipSel", zipSelection);
+            loadFilterProfiles.Parameters.AddWithValue("@regSel", regSelection);
             loadFilterProfiles.Parameters.AddWithValue("@ageSel1", ageSelectionMin);
             loadFilterProfiles.Parameters.AddWithValue("@ageSel2", ageSelectionMax);
 
