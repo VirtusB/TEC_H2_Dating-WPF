@@ -56,13 +56,30 @@ namespace TEC_H2_Dating
 
             interestReader.Close();
 
-            conn.Close();
+            
 
+            #endregion
+
+            #region Hent regioner fra databasen ind i region-comboboxen
+            var regionList = new List<string>(); // liste af interesser
+            SqlCommand getAllRegionsCmd = new SqlCommand("SELECT regionName FROM Regions", conn);
+            SqlDataReader regiontReader = getAllRegionsCmd.ExecuteReader();
+
+            while (regiontReader.Read())
+            {
+                string regiontName = regiontReader.GetString(0);
+                regSelect.Items.Add(regiontName);
+                regionList.Add(regiontName);
+            }
+
+            regiontReader.Close();
+
+            conn.Close();
             #endregion
 
         }
 
-        
+
 
         public static string FirstCharToUpper(string input)
         {

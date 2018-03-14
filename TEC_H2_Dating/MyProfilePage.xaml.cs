@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using System.IO.Compression;
+using System.Collections.Generic;
 
 namespace TEC_H2_Dating
 {
@@ -44,6 +45,22 @@ namespace TEC_H2_Dating
 
             conn.Open();
 
+            #region Hent regioner fra databasen ind i region-comboboxen
+            var regionList = new List<string>(); // liste af interesser
+            SqlCommand getAllRegionsCmd = new SqlCommand("SELECT regionName FROM Regions", conn);
+            SqlDataReader regiontReader = getAllRegionsCmd.ExecuteReader();
+
+            while (regiontReader.Read())
+            {
+                string regiontName = regiontReader.GetString(0);
+                txtProfileRegion.Items.Add(regiontName);
+                regionList.Add(regiontName);
+            }
+
+            regiontReader.Close();
+            #endregion
+
+
             SqlDataReader profileReader = getProfileData.ExecuteReader();
 
             while (profileReader.Read())
@@ -52,7 +69,8 @@ namespace TEC_H2_Dating
                 txtProfileLastName.Text = profileReader.GetString(1);
                 txtProfileCountry.Text = profileReader.GetString(2);
                 txtProfileCity.Text = profileReader.GetString(3);
-                txtProfileRegion.Text = profileReader.GetString(4);
+                //txtProfileRegion.Text = profileReader.GetString(4);
+                txtProfileRegion.SelectedItem = profileReader.GetString(4);
                 txtProfileAge.Text = profileReader.GetInt32(5).ToString();
 
                 if (profileReader.GetBoolean(6) == false)

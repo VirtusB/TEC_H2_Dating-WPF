@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
@@ -24,6 +25,30 @@ namespace TEC_H2_Dating
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblProfileUsername.Content = $"Profil oprettelse for {LoginScreen.usernamePublic}";
+
+            #region Hent interesser fra databasen ind i interesse-comboboxen
+            var regionList = new List<string>(); // liste af interesser
+
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
+
+            SqlCommand getAllRegionsCmd = new SqlCommand("SELECT regionName FROM Regions", conn);
+
+            conn.Open();
+
+            SqlDataReader regiontReader = getAllRegionsCmd.ExecuteReader();
+
+            while (regiontReader.Read())
+            {
+                string regiontName = regiontReader.GetString(0);
+                txtProfileRegion.Items.Add(regiontName);
+                regionList.Add(regiontName);
+            }
+
+            regiontReader.Close();
+
+            conn.Close();
+
+            #endregion
 
         }
 
@@ -224,7 +249,7 @@ namespace TEC_H2_Dating
             conn.Open();
 
 
-            SqlCommand insertProfile = new SqlCommand("INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, (SELECT regionid FROM regions where regionName = @pRegion) ) VALUES (@uID, @fName, @lName, @pBio, @pSex, @pAge, @pCountry, @pCity, @pRegion)", conn);
+            SqlCommand insertProfile = new SqlCommand("INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, regionid) VALUES (@uID, @fName, @lName, @pBio, @pSex, @pAge, @pCountry, @pCity, (SELECT regionid FROM regions where regionName = @pRegion))", conn);
 
             // tilføj alle lokale variabler til sql kommandoen
             insertProfile.Parameters.Add(new SqlParameter("@uID", userID));
