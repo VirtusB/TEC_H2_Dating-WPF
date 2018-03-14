@@ -128,8 +128,23 @@
         <StackPanel Grid.Column="0">
             <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
             <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="100" TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Padding="0 10 0 10" Margin="20" Grid.Column="0" Click="btnUpdateProfil_Click" x:Name="btnUpdateProfil"  Content="Opdater" Background="#545d6a" Foreground="White"></Button>
+
+                <Button Click="btnInteresserProfil_Click" Padding="0 10 0 10" Margin="20" Grid.Column="1" x:Name="btnInteresserProfil"  Content="Vælg interesser" Background="#545d6a" Foreground="White"></Button>
+
+            </Grid>
+            
+            
         </StackPanel>
-        <Button Click="btnUpdateProfil_Click" x:Name="btnUpdateProfil"  Content="Opdater" Margin="140 15" Padding="10" Background="#545d6a" Foreground="White"></Button>
+        
 
 
 

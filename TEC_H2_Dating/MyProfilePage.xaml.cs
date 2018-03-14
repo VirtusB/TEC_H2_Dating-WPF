@@ -490,5 +490,11 @@ namespace TEC_H2_Dating
         {
             
         }
+
+        private void btnInteresserProfil_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseProfileInterests CPS = new ChooseProfileInterests();
+            CPS.Show();
+        }
     }
 }
