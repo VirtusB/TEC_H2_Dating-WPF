@@ -38,8 +38,8 @@
 
                 <!--Postnummer-->
                 <StackPanel Grid.Column="1">
-                    <TextBlock Margin ="15 0 15 0 "  Foreground="White" Text="Postnummer"></TextBlock>
-                    <ComboBox x:Name="zipSelect" Margin ="15 0 15 0 ">
+                    <TextBlock Margin ="15 0 15 0 "  Foreground="White" Text="Region"></TextBlock>
+                    <ComboBox x:Name="regSelect" Margin ="15 0 15 0 ">
                         <ComboBoxItem IsSelected="True">Alle</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
