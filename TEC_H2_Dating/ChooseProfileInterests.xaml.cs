@@ -27,6 +27,7 @@ namespace TEC_H2_Dating
 
 
         public int profileID = LoginScreen.profileID;
+        public int userID = LoginScreen.userID;
 
         
 
@@ -36,6 +37,23 @@ namespace TEC_H2_Dating
         {
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
+            conn.Open();
+
+            #region Tjek brugerens profileID
+            // vi er nød til at få profileID fra databasen igen, hvis brugeren lige har oprettet en profil
+            // hvis det ikke er brugerens først log ind, så kan vi bruge profileid fra LoginScreen
+            if (profileID == 0)
+            {
+                SqlCommand profileExistence = new SqlCommand("SELECT profileID FROM Profiles WHERE Profiles.userID = @uID", conn);
+                profileExistence.Parameters.Add(new SqlParameter("@uID", userID));
+
+                object profileIDExist = profileExistence.ExecuteScalar();
+
+                profileID = Convert.ToInt32(profileIDExist);
+            }
+
+            #endregion
+        
             #region Få interesser
 
             var relationList = new List<int>();
@@ -43,7 +61,6 @@ namespace TEC_H2_Dating
             SqlCommand getProfileID = new SqlCommand("SELECT qRS.interestid FROM RS_ProfileInterests qRS FULL JOIN Interests qInt ON qInt.Interestid = qRS.interestID WHERE qRS.ProfileID = @pID", conn);
             getProfileID.Parameters.AddWithValue("@pID", profileID);
 
-            conn.Open();
 
             SqlDataReader userRSreader = getProfileID.ExecuteReader();
 
@@ -134,7 +151,10 @@ namespace TEC_H2_Dating
 
             foreach (CheckBox tb in FindVisualChildren<CheckBox>(CPIwindow))
             {
-                MessageBox.Show(tb.ToString());
+                if (tb.IsChecked.HasValue && tb.IsChecked.Value)
+                {
+                    MessageBox.Show(tb.ToString());
+                }
             }
 
 

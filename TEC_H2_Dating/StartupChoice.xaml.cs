@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Microsoft.SqlServer.Management.Smo;
+using Microsoft.SqlServer.Management.Common;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
+using System.Data.SqlClient;
+
 
 namespace TEC_H2_Dating
 {
@@ -37,5 +36,43 @@ namespace TEC_H2_Dating
             registerScreen.Show();
             this.Close();
         }
+
+        private void btnRunDBscript_Click(object sender, RoutedEventArgs e)
+        {
+            Load_Script(sender, e);
+        }
+
+
+        public void Load_Script(object sender, RoutedEventArgs e)
+        {
+            string sqlConnectionString = @"Data Source=localhost; Initial Catalog=master; Integrated Security=True;";
+
+            string script = File.ReadAllText(@"C:\Users\Focuz\Documents\GitHub\TEC_H2_Dating-WPF\TEC_H2_Dating\DBScript\TEC_H2_Dating.sql");
+
+            SqlConnection conn = new SqlConnection(sqlConnectionString);
+
+            Server server = new Server(new ServerConnection(conn));
+
+            int scriptCheck = server.ConnectionContext.ExecuteNonQuery(script);
+
+            try
+            {
+                if (scriptCheck != 0)
+                {
+                    MessageBox.Show("Scriptet blev kørt");
+                    MessageBox.Show("Rows affected: " + scriptCheck.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+
+
+        }
+
+
+
     }
 }

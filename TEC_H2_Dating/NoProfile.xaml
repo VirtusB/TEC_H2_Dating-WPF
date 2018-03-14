@@ -11,7 +11,7 @@
     <!--Dete er et window-->
 
     <Grid Background="#333">
-        <StackPanel>
+        <StackPanel VerticalAlignment="Center">
             <Label FontSize="18" Foreground="IndianRed" HorizontalAlignment="Center" Content="Du har ingen profil"></Label>
             <Button Click="noProfileBtn_Click" x:Name="noProfileBtn" Margin="50 20 50 0" Padding="0 5 0 5" Background="#545d6a" Foreground="White" Content="Opret Profil"></Button>
         </StackPanel>

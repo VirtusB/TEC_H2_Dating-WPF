@@ -32,7 +32,7 @@ namespace TEC_H2_Dating
 
             int userID = LoginScreen.userID; // lokalt user id
 
-           
+
 
             SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
@@ -90,25 +90,22 @@ namespace TEC_H2_Dating
 
 
             // vis profil billede fra databasen
-            
 
-            SqlDataAdapter sqa = new SqlDataAdapter("SELECT TOP 1 imageFile FROM Images WHERE userID = @uID ORDER BY CREATED DESC", conn);
-            sqa.SelectCommand.Parameters.AddWithValue("@uID", userID);
 
-           
 
-            DataSet ds = new DataSet();
+            SqlCommand command = new SqlCommand("SELECT TOP 1 imageFile FROM Images WHERE userID = @uID ORDER BY CREATED DESC", conn);
+            command.Parameters.AddWithValue("@uID", userID);
+
+
+            Byte[] content = command.ExecuteScalar() as Byte[];
+
+
 
             byte[] MyData = new byte[0];
 
-            sqa.Fill(ds);
-            DataRow myRow;
-
-            if (ds.Tables[0].Rows.Count == 1)
+            if (content != null)
             {
-                myRow = ds.Tables[0].Rows[0];
-
-                MyData = (byte[])myRow["imageFile"];
+                MyData = content;
 
                 MemoryStream stream = new MemoryStream(MyData);
                 stream.Write(MyData, 0, MyData.Length);
@@ -122,16 +119,18 @@ namespace TEC_H2_Dating
                 bi.StreamSource = ms;
                 bi.EndInit();
 
-                
+
 
                 profileImageBox.Source = bi;
-
-
-                
-
             }
 
-                
+
+
+
+
+
+
+
 
 
 
@@ -292,7 +291,7 @@ namespace TEC_H2_Dating
 
             #endregion
 
-            
+
 
 
             #endregion
@@ -357,7 +356,7 @@ namespace TEC_H2_Dating
                 MessageBox.Show("Fejl under opdatering");
             }
 
-            
+
 
 
             conn.Close();
@@ -389,7 +388,7 @@ namespace TEC_H2_Dating
                 MessageBox.Show("Billedet må ikke være tomt");
                 return;
             }
-            
+
 
             FileStream fs = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read);
 
@@ -400,7 +399,7 @@ namespace TEC_H2_Dating
 
 
 
-            
+
 
 
 
@@ -481,7 +480,7 @@ namespace TEC_H2_Dating
 
         private void MyProfilePage_Unloaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void btnInteresserProfil_Click(object sender, RoutedEventArgs e)

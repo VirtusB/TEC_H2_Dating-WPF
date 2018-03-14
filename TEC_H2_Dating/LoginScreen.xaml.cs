@@ -101,7 +101,9 @@ namespace TEC_H2_Dating
                         profileExistence.Parameters.Add(new SqlParameter("@uID", userID));
 
                         object profileIDExist = profileExistence.ExecuteScalar();
-                        profileID = (int)profileIDExist;
+                        //profileID = (int)profileIDExist; // virker kun hvis brugeren har en profil, ellers kommer der en fejl ved login
+                        profileID = Convert.ToInt32(profileIDExist); // sætter profileid til 0, hvis brugeren ikke har en profil. dette fejl senere, da profileid bliver brugt andre steder i programmet
+
 
                         if (profileIDExist == null)
                         {
@@ -127,6 +129,15 @@ namespace TEC_H2_Dating
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message); // hvis beskeden hvis der er en fejl relateret til vores sql connection
+
+                // Get stack trace for the exception with source file information
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+
+                MessageBox.Show("Line: " + line.ToString());
             }
             finally
             {

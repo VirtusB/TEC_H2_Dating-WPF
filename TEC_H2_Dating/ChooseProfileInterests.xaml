@@ -18,7 +18,7 @@
             </WrapPanel>
 
             <Button Click="btnProfileUpdateInterests_Click" MaxWidth="150" x:Name="btnProfileUpdateInterests" Padding="15" Margin="0 25 0 0" Background="#545d6a" Foreground="White" Content="Opdater interesser"></Button>
-            <CheckBox>hej</CheckBox>
+
             
            
 
