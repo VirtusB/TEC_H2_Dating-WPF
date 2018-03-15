@@ -145,20 +145,61 @@ namespace TEC_H2_Dating
             }
         }
 
+
+
         private void btnProfileUpdateInterests_Click(object sender, RoutedEventArgs e)
         {
             #region Opdater interesser
+
+            StringBuilder dynQuery = new StringBuilder("INSERT INTO RS_ProfileInterests (ProfileId, InterestId) VALUES ");
+
+            var checkedBoxes = new List<int>();
 
             foreach (CheckBox tb in FindVisualChildren<CheckBox>(CPIwindow))
             {
                 if (tb.IsChecked.HasValue && tb.IsChecked.Value)
                 {
-                    MessageBox.Show(tb.ToString());
+                    checkedBoxes.Add(Convert.ToInt32(tb.Tag));
+                    //MessageBox.Show(tb.ToString());
+                    //MessageBox.Show(tb.IsChecked.ToString());
+                    //MessageBox.Show(tb.Tag.ToString());
+                    dynQuery.Append("(" + profileID + ", " + tb.Tag + "),");
+                    // MessageBox.Show(dynQuery.ToString());
                 }
+               
             }
 
+            if (checkedBoxes.Count == 0)
+            {
+                MessageBox.Show("Du skal vælge mindst én interesse");
+                return;
+            }
+            else
+            {
+                dynQuery.Length--;
+              //  MessageBox.Show(dynQuery.ToString());
+            }
 
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
 
+            conn.Open();
+
+            SqlCommand updateInterests = new SqlCommand(dynQuery.ToString(), conn);
+            SqlCommand deleteInterests = new SqlCommand("DELETE FROM RS_ProfileInterests WHERE profileid = @pID", conn);
+            deleteInterests.Parameters.Add(new SqlParameter("@pID", profileID));
+
+            deleteInterests.ExecuteNonQuery();
+            int updateNotification = updateInterests.ExecuteNonQuery();
+
+            if (updateNotification != 0)
+            {
+                MessageBox.Show("Dine interesser er nu opdateret");
+            }
+            else
+            {
+                MessageBox.Show("Fejl i opdatering af interesser");
+            }
+            
 
             #endregion
         }
