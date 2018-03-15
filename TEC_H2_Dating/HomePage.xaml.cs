@@ -318,5 +318,10 @@ namespace TEC_H2_Dating
                 hpProfileImage.Source = bi;
             }
         }
+
+        private void btnShowProfile_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
