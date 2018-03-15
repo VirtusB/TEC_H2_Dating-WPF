@@ -29,6 +29,7 @@ namespace TEC_H2_Dating
 
         }
 
+        public int userID = LoginScreen.userID;
         
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
@@ -147,7 +148,8 @@ namespace TEC_H2_Dating
                                     FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
                                     WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
                                     AND qPro.age BETWEEN @ageSel1 AND @ageSel2 
-                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
+                                    AND qUse.UserID != @uID";
 
             }
             else if (regSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle") // alle regioner, alle interesser
@@ -160,7 +162,8 @@ namespace TEC_H2_Dating
                                     FULL JOIN Interests qInt ON qInt.interestID = qRS.interestId 
                                     FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
                                     WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 
-                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2";
+                                    AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
+                                    AND qUse.UserID != @uID";
             }
             else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle") // specifik regin, alle interesser
             {
@@ -173,7 +176,8 @@ namespace TEC_H2_Dating
                                     FULL JOIN Regions qReg ON qReg.RegionID = qPro.RegionId
                                     WHERE qPro.age BETWEEN @ageSel1 AND @ageSel2 
                                     AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
-                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)";
+                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)
+                                    AND qUse.UserID != @uID";
             }
             else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle") // specifik region, specifik interesse
             {
@@ -187,7 +191,8 @@ namespace TEC_H2_Dating
                                     WHERE qInt.interestID = (SELECT interestID FROM Interests WHERE interestName = @intSel) 
                                     AND qPro.age BETWEEN @ageSel1 AND @ageSel2 
                                     AND qPro.sex BETWEEN @sexSel1 AND @sexSel2
-                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)";
+                                    AND qReg.regionId = (SELECT RegionID FROM Regions WHERE regionName = @regSel)
+                                    AND qUse.UserID != @uID";
             }
 
             #endregion
@@ -205,6 +210,7 @@ namespace TEC_H2_Dating
             loadFilterProfiles.Parameters.AddWithValue("@regSel", regSelection);
             loadFilterProfiles.Parameters.AddWithValue("@ageSel1", ageSelectionMin);
             loadFilterProfiles.Parameters.AddWithValue("@ageSel2", ageSelectionMax);
+            loadFilterProfiles.Parameters.AddWithValue("@uID", userID);
 
             SqlDataReader profileReader = loadFilterProfiles.ExecuteReader();
 
