@@ -194,6 +194,7 @@ namespace TEC_H2_Dating
             if (updateNotification != 0)
             {
                 MessageBox.Show("Dine interesser er nu opdateret");
+                this.Close();
             }
             else
             {

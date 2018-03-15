@@ -124,10 +124,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
             </Grid>
-
+            
             <StackPanel Grid.Column="0">
                 <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Padding="0 0 0 100"  Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
+                <Grid>
+                    <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="100" TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
+                    <Label Foreground="#fff" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="{Binding ElementName=txtProfileBio, Path=LineCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+                </Grid>
+                
             </StackPanel>
 
             <Grid MaxWidth="600">
