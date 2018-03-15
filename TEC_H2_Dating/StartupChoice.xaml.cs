@@ -47,7 +47,7 @@ namespace TEC_H2_Dating
         {
             string sqlConnectionString = @"Data Source=localhost; Initial Catalog=master; Integrated Security=True;";
 
-            string script = File.ReadAllText(@"C:\Users\Focuz\Documents\GitHub\TEC_H2_Dating-WPF\TEC_H2_Dating\DBScript\TEC_H2_Dating.sql");
+            string script = File.ReadAllText(@".\..\..\DBScript\TEC_H2_Dating.sql");
 
             SqlConnection conn = new SqlConnection(sqlConnectionString);
 

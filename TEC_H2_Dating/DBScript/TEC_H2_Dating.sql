@@ -152,7 +152,7 @@ VALUES 	('Musik'),
 		('Brætspil'),
 		('Fitness')
 
-GO
+/* GO
 
 INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, regionId)
 VALUES (1, 'Bruger', 'brugeren', 'min bio', 1, 19, 'Danmark', 'Snekkersten', '1')
@@ -160,7 +160,7 @@ VALUES (1, 'Bruger', 'brugeren', 'min bio', 1, 19, 'Danmark', 'Snekkersten', '1'
 GO
 
 INSERT INTO Profiles (userID, profileFirstName, profileLastName, profileBio, sex, age, country, city, regionId)
-VALUES (2, 'Brugerto', 'brugerento', 'bruger2 min bio', 1, 19, 'Danmark', 'Snekkersten', '2')
+VALUES (2, 'Brugerto', 'brugerento', 'bruger2 min bio', 1, 19, 'Danmark', 'Snekkersten', '2') */
 
 GO
 
