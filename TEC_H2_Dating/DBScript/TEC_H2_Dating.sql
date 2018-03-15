@@ -125,14 +125,14 @@ VALUES 	('Nordjylland'),
 		('Nordsjælland'),
 		('København')
 		
-GO
+/* GO
 
 INSERT INTO Users (Username, userpassword, email)
 VALUES ('Bruger', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'brugermail@mail.com')
 GO
 
 INSERT INTO Users (Username, userpassword, email)
-VALUES ('Bruger2', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'bruger2mail@mail.com')
+VALUES ('Bruger2', '376f30fadbf88b322a6fe61adda5bb72010ba720c74f7b588c0fe86d9dafb4a1', 'bruger2mail@mail.com') */
 GO
 
 INSERT INTO Interests (InterestName)

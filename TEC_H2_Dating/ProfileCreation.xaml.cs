@@ -52,6 +52,10 @@ namespace TEC_H2_Dating
 
         }
 
+        
+
+
+
         public bool isPictureChosen;
 
         // Tjek username og password
@@ -268,6 +272,8 @@ namespace TEC_H2_Dating
                 MessageBox.Show($"Din profil blev oprettet, {profileFornavn} {profileEfternavn}");
                 MainWindow dashboard = new MainWindow();
                 dashboard.Show();
+                ChooseProfileInterests CPS = new ChooseProfileInterests();
+                CPS.Show();
                 this.Close();
             }
             else

@@ -129,10 +129,16 @@
                 <TextBlock HorizontalAlignment="Center" Foreground="white" Text="Profil beskrivelse"></TextBlock>
                 <TextBox TextWrapping="Wrap" AcceptsReturn="True" x:Name="txtProfileBio" Padding="0 0 0 100"  Margin="5" Grid.Column="1" Background="#545d6a" Foreground="White" FontSize="18"></TextBox>
             </StackPanel>
-            <Button Click="btnProfileCreate_Click" x:Name="btnProfileCreate" Content="Opret profil" Margin="140 15" Padding="10" Background="#545d6a" Foreground="White"></Button>
 
-            
-            
+            <Grid MaxWidth="600">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Click="btnProfileCreate_Click" Padding="0 10 0 10" Margin="20" x:Name="btnProfileCreate" Content="Opret profil" Background="#545d6a" Foreground="White"></Button>
+
+            </Grid>
+
+
         </StackPanel>
 
 
