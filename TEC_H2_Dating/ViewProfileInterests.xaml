@@ -1,0 +1,29 @@
+﻿<Window x:Class="TEC_H2_Dating.ViewProfileInterests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TEC_H2_Dating"
+        mc:Ignorable="d"
+        x:Name="VPIwindow"
+        WindowStartupLocation="CenterScreen"
+        Loaded="VPIwindow_Loaded"
+        Title="ViewProfileInterests" Height="600" Width="600">
+
+    <Grid Background="#2e3137">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Background="#2e3137">
+
+            <TextBlock Margin="0 0 0 25" FontSize="18" HorizontalAlignment="Center" Foreground="White" Text="Interesser"></TextBlock>
+            <WrapPanel HorizontalAlignment="Center" x:Name="interestsWrapPanel" Height="400" Orientation="Vertical" >
+            </WrapPanel>
+
+
+
+
+
+        </StackPanel>
+
+
+    </Grid>
+
+</Window>

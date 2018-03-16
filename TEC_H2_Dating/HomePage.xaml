@@ -131,6 +131,8 @@
                         <TextBlock x:Name="txtTextBtn" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Bottom" Grid.Column="1" Text="Camilla's Profil"></TextBlock>
                     </Grid>
 
+                    <Button Margin="0 20 0 0" MaxWidth="200" Background="#545d6a" Foreground="White" Content="Interesser"></Button>
+
                 </StackPanel>
 
 

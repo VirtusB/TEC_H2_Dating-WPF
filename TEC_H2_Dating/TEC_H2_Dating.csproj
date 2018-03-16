@@ -112,8 +112,14 @@
     <Compile Include="RegisterScreen.xaml.cs">
       <DependentUpon>RegisterScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowProfileWindow.xaml.cs">
+      <DependentUpon>ShowProfileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StartupChoice.xaml.cs">
       <DependentUpon>StartupChoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProfileInterests.xaml.cs">
+      <DependentUpon>ViewProfileInterests.xaml</DependentUpon>
     </Compile>
     <Page Include="ChooseProfileInterests.xaml">
       <SubType>Designer</SubType>
@@ -166,7 +172,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ShowProfileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartupChoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewProfileInterests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
