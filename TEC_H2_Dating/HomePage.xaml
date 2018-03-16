@@ -125,7 +125,7 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Button Margin="20" VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
+                        <Button Click="btnShowProfile_Click" x:Name="btnShowProfile" Margin="20" VerticalAlignment="Center" Style="{StaticResource NoHoverButton}"   Focusable="False" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Grid.Column="1">
                             <fa:ImageAwesome  Width="60" Foreground="#5f6e83" Icon="AddressCard" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                         <TextBlock x:Name="txtTextBtn" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Bottom" Grid.Column="1" Text="Camilla's Profil"></TextBlock>

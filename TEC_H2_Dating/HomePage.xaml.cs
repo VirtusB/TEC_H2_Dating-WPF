@@ -216,7 +216,7 @@ namespace TEC_H2_Dating
 
             if (!profileReader.HasRows)
             {
-                MessageBox.Show("Ingen profiler fundet, nedsæt søgekrititer");
+                MessageBox.Show("Ingen profiler fundet, nedsæt søgekriterier");
                 return;
             }
             else
@@ -245,6 +245,13 @@ namespace TEC_H2_Dating
             txtProfileBio.Text = listOfProfiles[0].ProfileBio; // sæt beskrivelse
             txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}"; // sæt fornavn, alder, by
             txtTextBtn.Text = $"Vis {listOfProfiles[0].FirstName}'s Profil"; // sæt teksten som står under vis profil knappen, altså f.eks. "Vis Camilla's Profil"
+
+            MessageBox.Show(listOfProfiles.Count.ToString());
+
+            foreach (var item in listOfProfiles)
+            {
+                MessageBox.Show(item.FirstName);
+            }
 
             conn.Close(); // luk conn
             conn.Dispose();
@@ -317,6 +324,11 @@ namespace TEC_H2_Dating
                 bi.EndInit();
                 hpProfileImage.Source = bi;
             }
+        }
+
+        private void btnShowProfile_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
