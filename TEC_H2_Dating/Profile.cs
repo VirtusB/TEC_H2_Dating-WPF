@@ -16,6 +16,7 @@ namespace TEC_H2_Dating
         private byte[] profileimage;
         private string profilebio;
         private string city;
+        private int profileid;
         #endregion
 
         #region getters and setters
@@ -28,6 +29,18 @@ namespace TEC_H2_Dating
             set
             {
                 firstname = value;
+            }
+        }
+
+        public int ProfileID
+        {
+            get
+            {
+                return profileid;
+            }
+            set
+            {
+                profileid = value;
             }
         }
 
@@ -103,6 +116,7 @@ namespace TEC_H2_Dating
             ProfileImage = null;
             ProfileBio = "No bio";
             City = "Ingen by";
+            ProfileID = 0;
         }
 
         

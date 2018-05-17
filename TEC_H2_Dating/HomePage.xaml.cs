@@ -139,7 +139,7 @@ namespace TEC_H2_Dating
 
             if (regSelect.Text == "Alle" && dashInterestsCombobox.Text != "Alle") // alle regioner, specifik interesse
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                queryChoice = @"SELECT DISTINCT profilefirstname, age, city, qImg.imageFile, Profilebio, qPro.profileID
                                     FROM profiles qPro 
                                     FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                     FULL JOIN Images qImg ON qPro.userID = qImg.userID 
@@ -154,7 +154,7 @@ namespace TEC_H2_Dating
             }
             else if (regSelect.Text == "Alle" && dashInterestsCombobox.Text == "Alle") // alle regioner, alle interesser
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                queryChoice = @"SELECT DISTINCT profilefirstname, age, city, qImg.imageFile, Profilebio, qPro.profileID
                                     FROM profiles qPro 
                                     FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                     FULL JOIN Images qImg ON qPro.userID = qImg.userID 
@@ -167,7 +167,7 @@ namespace TEC_H2_Dating
             }
             else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text == "Alle") // specifik regin, alle interesser
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                queryChoice = @"SELECT DISTINCT profilefirstname, age, city, qImg.imageFile, Profilebio, qPro.profileID
                                     FROM profiles qPro 
                                     FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                     FULL JOIN Images qImg ON qPro.userID = qImg.userID 
@@ -181,7 +181,7 @@ namespace TEC_H2_Dating
             }
             else if (regSelect.Text != "Alle" && dashInterestsCombobox.Text != "Alle") // specifik region, specifik interesse
             {
-                queryChoice = @"SELECT profilefirstname, age, city, qImg.imageFile, Profilebio 
+                queryChoice = @"SELECT DISTINCT profilefirstname, age, city, qImg.imageFile, Profilebio, qPro.profileID
                                     FROM profiles qPro 
                                     FULL JOIN Users qUse ON qPro.userID = qUse.userID 
                                     FULL JOIN Images qImg ON qPro.userID = qImg.userID 
@@ -217,10 +217,13 @@ namespace TEC_H2_Dating
             if (!profileReader.HasRows)
             {
                 MessageBox.Show("Ingen profiler fundet, nedsæt søgekriterier");
+                btnShowProfileInterests.IsEnabled = false;
                 return;
             }
             else
             {
+                btnShowProfileInterests.IsEnabled = true;
+
                 while (profileReader.Read())
                 {
                     listOfProfiles.Add(new Profile
@@ -229,10 +232,13 @@ namespace TEC_H2_Dating
                         Age = profileReader.GetInt32(1),
                         City = profileReader.GetString(2),
                         ProfileBio = profileReader.GetString(4),
-                        ProfileImage = (byte[])profileReader["imageFile"]
+                        ProfileImage = (byte[])profileReader["imageFile"],
+                        ProfileID = profileReader.GetInt32(5)
                     });
                 }                      
             }
+
+            
 
             MemoryStream strm = new MemoryStream(listOfProfiles[0].ProfileImage);
             BitmapImage bi = new BitmapImage();
@@ -246,12 +252,7 @@ namespace TEC_H2_Dating
             txtProfileInfo.Text = $"{listOfProfiles[0].FirstName}, {listOfProfiles[0].Age.ToString()}, {listOfProfiles[0].City}"; // sæt fornavn, alder, by
             txtTextBtn.Text = $"Vis {listOfProfiles[0].FirstName}'s Profil"; // sæt teksten som står under vis profil knappen, altså f.eks. "Vis Camilla's Profil"
 
-            MessageBox.Show(listOfProfiles.Count.ToString());
-
-            foreach (var item in listOfProfiles)
-            {
-                MessageBox.Show(item.FirstName);
-            }
+            
 
             conn.Close(); // luk conn
             conn.Dispose();
@@ -329,6 +330,105 @@ namespace TEC_H2_Dating
         private void btnShowProfile_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public void btnShowProfileInterests_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Data Source=localhost; Initial Catalog=TEC_H2_Dating; Integrated Security=True;");
+            conn.Open();
+
+            ViewProfileInterests VPI = new ViewProfileInterests();
+            //VPI.profileIDlbl.Content = listOfProfiles[_I].ProfileID.ToString();
+
+            // få interesser
+            var relationList = new List<int>();
+
+           
+
+            SqlCommand getInterests = new SqlCommand("SELECT qRS.interestid FROM RS_ProfileInterests qRS FULL JOIN Interests qInt ON qInt.Interestid = qRS.interestID WHERE qRS.ProfileID = @pID", conn);
+
+            if (listOfProfiles.Count == 0)
+            {
+                return;
+            }
+
+            getInterests.Parameters.AddWithValue("@pID", listOfProfiles[_I].ProfileID);
+
+            SqlDataReader userRSreader = getInterests.ExecuteReader();
+
+            VPI.Show();
+
+
+            while (userRSreader.Read())
+            {
+                int rsID = userRSreader.GetInt32(0);
+                relationList.Add(rsID);
+            }
+
+
+           
+
+            userRSreader.Close();
+
+            var converter = new System.Windows.Media.BrushConverter();
+            var thickconverter = new System.Windows.ThicknessConverter();
+
+            
+            
+            string idsForQuery = string.Join(",", relationList.Select(n => n.ToString()).ToArray());
+            
+            if (idsForQuery == "")
+            {
+                return;
+            }
+
+            SqlCommand getMatchingInterests = new SqlCommand($"SELECT  interestName, interestID FROM Interests WHERE interestID IN ({idsForQuery}) ORDER BY interestName ASC", conn);
+
+            SqlDataReader interestReader = getMatchingInterests.ExecuteReader();
+
+            foreach (int rsID in relationList)
+            {
+                //MessageBox.Show(rsID.ToString());
+
+
+            }
+
+            while (interestReader.Read())
+            {
+                string interestName = interestReader.GetString(0);
+                int interestID = interestReader.GetInt32(1);
+                //interestIDlist.Add(interestID);
+
+
+                CheckBox box;
+                box = new CheckBox();
+                box.Tag = interestID.ToString();
+                box.Name = "boks" + interestID.ToString();
+                box.Foreground = (Brush)converter.ConvertFromString("#FFF");
+                box.Margin = (Thickness)thickconverter.ConvertFromString("15");
+                box.Content = interestName;
+                box.IsHitTestVisible = false;
+
+                if (relationList.Contains(interestID))
+                {
+                    box.IsChecked = true;
+
+                }
+
+                VPI.interestsWrapPanel.Children.Add(box);
+                
+
+            }
+
+            interestReader.Close();
+
+            conn.Close();
+
+
+
+
+
+
         }
     }
 }

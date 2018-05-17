@@ -23,10 +23,5 @@ namespace TEC_H2_Dating
         {
             InitializeComponent();
         }
-
-        private void VPIwindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
